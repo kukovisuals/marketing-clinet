@@ -1,0 +1,35 @@
+.Navigation {
+    grid-area: hd;
+    background-color: brown;
+    grid-row: 1/1;
+
+}
+.Main {
+    grid-area: main;
+    background-color:#222;
+    grid-row: 2/8;
+}
+.Footer {
+    grid-area: ft;
+    background-color: black;
+    grid-row: 7/10;
+}
+.wrapper {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: minmax(10, 1fr);
+    grid-template-areas:
+      "hd hd hd hd   hd   hd   hd   hd   hd"
+      "main main main main main main main main main"
+      "ft ft ft ft   ft   ft   ft   ft   ft";
+}
+.a-ref-element{
+    color:#ff6347;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.eby-component-flex{
+    display: flex;
+    justify-content: space-between;
+}
