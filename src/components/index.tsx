@@ -1,5 +1,4 @@
-import Footer from './footer/footer';
 import Main from './main/main';
-import Navigation from './nav/nav';
+import Profile from './profile/profile';
 
-export {Footer, Main, Navigation }
+export {Main, Profile }

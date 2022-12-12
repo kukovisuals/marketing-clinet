@@ -1,15 +1,14 @@
 
 import Selection from './selection/selection';
-import Profile from './profile/profile';
+import PdpSheet from './pdpSheet/pdpSheet';
 import './main.css';
 
 function Main() {
 
   return (
     <div className="Main">
-      <h1>Main</h1>
       <Selection/>
-      <Profile/>
+      <PdpSheet/>
     </div>
   )
 }

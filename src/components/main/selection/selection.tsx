@@ -1,44 +1,50 @@
+import React from 'react';
+import { Dayjs } from 'dayjs';
+import TextField from '@mui/material/TextField';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 import './selection.css'
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 function Selection() {
 
+    const [value, setValue] = React.useState<Dayjs | null>(null);
+    const [value2, setValue2] = React.useState<Dayjs | null>(null);
     return (
-      <div className="Selection">
-        <h2>Selection</h2>
-        <div className="eby-wrapper-selection">
-            <div className="eby-component-flex">
-                <div className="eby-selection-list">
-                    collateral: INSERT
-                </div>
-                <div className="eby-selection-list">
-                    <span className="a-ref-element">Change</span>
-                </div>
-                <div className="eby-selection-list">
-                    <span className="a-ref-element">Remove</span>
-                </div>
-                <div className="eby-selection-list">
-                    <div>
-                        <select name="months" id="managaMonths">
-                            <option value="jan">Jan</option>
-                            <option value="feb">Feb</option>
-                            <option value="mar">Mar</option>
-                            <option value="apr">Apr</option>
-                            <option value="may">May</option>
-                            <option value="jun">Jun</option>
-                            <option value="jul">Jul</option>
-                            <option value="aug">Aug</option>
-                            <option value="sep">Sep</option>
-                            <option value="oct">Oct</option>
-                            <option value="nov">Nov</option>
-                            <option value="dec">Dec</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+        <div className="Selection">
+            <h2>Selection</h2>
+
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                    label="Basic example"
+                    value={value}
+                    onChange={(newValue) => {
+                        setValue(newValue);
+                    }}
+                    renderInput={(params) => <TextField {...params} />}
+                />
+            </LocalizationProvider>
+            <span> to </span>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                    label="Basic example"
+                    value={value2}
+                    onChange={(newValue) => {
+                        setValue2(newValue);
+                    }}
+                    renderInput={(params) => <TextField {...params} />}
+                />
+            </LocalizationProvider>
+            <Stack spacing={2} direction="row">
+                <Button variant="text">Submit</Button>
+                <Button variant="contained">Submit</Button>
+                <Button variant="outlined">Submit</Button>
+            </Stack>
         </div>
-      </div>
     )
-  }
-  
-  export default Selection
-  
+}
+
+export default Selection

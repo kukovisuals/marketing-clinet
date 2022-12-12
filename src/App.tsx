@@ -1,14 +1,12 @@
-import { useState } from 'react'
 import './App.css'
-import { Navigation, Main, Footer } from './components'
+import { Main, Profile } from './components'
 
 function App() {
 
   return (
     <div className="App wrapper">
-      <Navigation/>
       <Main/>
-      <Footer/>
+      <Profile/>
     </div>
   )
 }
