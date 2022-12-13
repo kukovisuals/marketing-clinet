@@ -1,17 +1,17 @@
-.Upload{
-    border:1px solid black;
-    width: 100%;
+.Upload {
+  border: 1px solid black;
+  width: 100%;
 }
-.Selection{
-    border: 1px solid black;
-    width: 100%;
+.Selection {
+  border: 1px solid black;
+  width: 100%;
 }
-.eby-header-style{
-    background-color: rgb(13, 32, 198);
+.eby-header-style {
+  background-color: rgb(13, 32, 198);
 }
-.eby-row-color-light{
-    background-color: cornflowerblue;
+.eby-row-color-light {
+  background-color: cornflowerblue;
 }
-.eby-row-color-dark{
-    background-color: rgb(9, 134, 151);
+.eby-row-color-dark {
+  background-color: rgb(9, 134, 151);
 }

@@ -16,7 +16,7 @@
 }
 *,
 body,
-html{
+html {
   box-sizing: border-box;
 }
 
@@ -45,9 +45,9 @@ button {
   font-size: 1em;
   cursor: pointer;
 }
-select{
+select {
   cursor: pointer;
 }
-span{
+span {
   font-size: 0.7rem;
 }

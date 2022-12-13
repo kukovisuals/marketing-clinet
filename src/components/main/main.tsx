@@ -7,8 +7,8 @@ function Main() {
 
   return (
     <div className="Main">
-      <Selection/>
-      <PdpSheet/>
+      <Selection />
+      <PdpSheet />
     </div>
   )
 }

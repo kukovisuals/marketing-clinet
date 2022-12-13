@@ -1,57 +1,56 @@
 .Navigation {
-    background-color: brown;
-    grid-row: 1/1;
-
+  background-color: brown;
+  grid-row: 1/1;
 }
 .Main {
-    /* background-color:#222; */
-    grid-row: 2/8;
+  /* background-color:#222; */
+  grid-row: 2/8;
 }
 .Footer {
-    /* background-color: black; */
-    grid-row: 7/10;
+  /* background-color: black; */
+  grid-row: 7/10;
 }
 .wrapper {
-    height: 100vh;
+  height: 100vh;
 }
-.a-ref-element{
-    color:#ff6347;
-    text-decoration: underline;
-    cursor: pointer;
+.a-ref-element {
+  color: #ff6347;
+  text-decoration: underline;
+  cursor: pointer;
 }
-.eby-component-flex{
-    display: flex;
-    flex-wrap: nowrap;
-    /* justify-content: space-between; */
+.eby-component-flex {
+  display: flex;
+  flex-wrap: nowrap;
+  /* justify-content: space-between; */
 }
-.eby-sm-flex{
-    display:flex;
+.eby-sm-flex {
+  display: flex;
 }
 
 /* PROFILE */
-.Profile{
-    position: relative;
+.Profile {
+  position: relative;
 }
-.eby-container{
-    display: flex;
-    flex-wrap: wrap;
-    min-height: 300px;
+.eby-container {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 300px;
 }
-.eby-list{
-    width: 20%;
-    border: 1px solid white;
-    position: relative;
+.eby-list {
+  width: 20%;
+  border: 1px solid white;
+  position: relative;
 }
-.eby-sheet-1{
-    width: 40px;
+.eby-sheet-1 {
+  width: 40px;
 }
-.eby-sheet-sm{
-    width: 9%;
+.eby-sheet-sm {
+  width: 9%;
 }
-.eby-sheet-lg{
-    width: 24%;
+.eby-sheet-lg {
+  width: 24%;
 }
-.eby-bttm-abs{
-    bottom: 0;
-    position: absolute;
+.eby-bttm-abs {
+  bottom: 0;
+  position: absolute;
 }
