@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 const profileData = [
     'All Thongs Mix',
@@ -15,14 +16,15 @@ const profileData = [
 ]
 
 function Profile() {
+    const sheet = useAppSelector((state) => state.sheet);
 
     return (
         <div className="Profile">
             <h2>Profile</h2>
             <div className="eby-wrapper">
                 <div className="eby-container">
-                    {profileData.map((profile: string) =>
-                        <ListProfiles data={profile} key={profile} />
+                    {sheet && sheet.map((profile: any) =>
+                        <ListProfiles data={profile.name} key={profile.name} />
                     )}
                 </div>
             </div>
@@ -90,16 +92,11 @@ function ListProfiles(props: ListProps) {
     return (
         <div className="eby-list">
             <div>
-                <span>{props.data}</span>
+                <span className='title-md'>{props.data}</span>
             </div>
-            <div>
-                All Briefs in Mixed
-                <div>
-                    <div> SKQ1A :: SKQ1B</div>
-                </div>
-            </div>
+            
             <div className="eby-bttm-abs">
-                <Button variant="contained" onClick={toggleDrawer('bottom', true)}>ADD</Button>
+                <Button variant="contained" onClick={toggleDrawer('bottom', true)}>ADD size</Button>
                 <Drawer
                     anchor='bottom'
                     open={state['bottom']}

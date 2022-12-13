@@ -1,9 +1,13 @@
 import { ChangeEvent } from "react";
 import Papa, { parse } from 'papaparse';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { initObject } from "../../../features/sheet/sheet-slice";
 
 function Upload(props: any) {
+  // grab the reducer from sheet-slice 
+  const dispatch = useAppDispatch();
+
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target && event.target.files) {
 
@@ -15,15 +19,16 @@ function Upload(props: any) {
           const csvData: any = event.target.result;
           const parsedData = Papa.parse(csvData);
           // -----------------------------------------------------------
-          const comingData = parsedData.data
+          const comingData:any = parsedData.data
           const columns = comingData[0];
           let rows = []
           for (let i = 1; i < comingData.length; i++) {
             rows.push(comingData[i])
-
+            const rowA = comingData[i][1]
+              .split('-')[1]
+            console.log(rowA)
+            dispatch(initObject(rowA))
           }
-          console.log('columns ->', columns)
-          console.log('rows ->', rows)
           // -----------------------------------------------------------
           props.onData(parsedData.data)
         }

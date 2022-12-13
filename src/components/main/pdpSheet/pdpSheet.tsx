@@ -6,7 +6,7 @@ function PdpSheet() {
 
   // grab CSV data
   const handleChildData = (data: string[]) => {
-    console.log(data)
+    // console.log(data)
     setProfile(data)
   }
 

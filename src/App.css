@@ -40,6 +40,10 @@
   width: 20%;
   border: 1px solid white;
   position: relative;
+  min-height: 89px;
+}
+.title-md{
+  font-size: 1rem;
 }
 .eby-sheet-1 {
   width: 40px;
