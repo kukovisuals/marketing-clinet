@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from './app/hooks';
-import { incremented, amountAdded } from './features/counter/counter-slice'
+import { incremented, amountAdded } from './features/counter/counter-slice';
 import './App.css'
 import { Main, Profile } from './components'
 

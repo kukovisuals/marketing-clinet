@@ -51,3 +51,9 @@ select {
 span {
   font-size: 0.7rem;
 }
+ul{
+  padding: 0;
+}
+li{
+  display: block;
+}
