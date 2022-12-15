@@ -26,13 +26,11 @@ function Upload(props: any) {
             rows.push(comingData[i])
             const rowA = comingData[i][1]
               .split('-')[1]
-            console.log(rowA)
-            dispatch(initObject(rowA))
+            dispatch(initObject({id:i - 1, name:rowA}))
           }
           // -----------------------------------------------------------
           props.onData(parsedData.data)
         }
-        // do something with the parsed data
       };
       reader.readAsText(file);
     }

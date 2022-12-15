@@ -14,7 +14,7 @@ function PdpSheet() {
     <div className="Profile">
       <h2>Upload</h2>
       <Upload onData={handleChildData} />
-      <div>
+      <div className='sheet-block'>
         {profile && profile.map((d: string, i: number) =>
           <ImportedData data={d} index={i} />
         )}
