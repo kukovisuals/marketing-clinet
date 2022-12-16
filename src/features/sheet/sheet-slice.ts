@@ -1,9 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+type TodoType = {
+  id: string;
+  name: string;
+}
 interface CounterState {
   id: number;
   name: string;
-  pdps: string[];
+  pdps2: TodoType[];
 }
 
 const initialState: Array<CounterState> = [];
@@ -16,21 +19,24 @@ const sheetSlice = createSlice({
       state.push({
         id: action.payload.id,
         name: action.payload.name,
-        pdps: [],
+        pdps2:[],
       });
     },
-    insertIndex(
+    addSelectedPdp(
       state,
-      action: PayloadAction<{ index: number; description: string[] }>
+      action: PayloadAction<{ index: number; description: TodoType[] }>
     ) {
-      state[action.payload.index].pdps = action.payload.description;
+      console.log(action.payload.description)
+      state[action.payload.index].pdps2 = action.payload.description;
     },
     removePdp(state, action: PayloadAction<{index:number, id:number}>) {
       const {index, id} = action.payload;
       // Find the object with the specified 'id'
       const object = state.find((obj) => obj.id === id);
       // Use splice to remove the array at the specified index from the nestedArray
-      if (object) object.pdps.splice(index, 1);
+      if (object) {
+        object.pdps2.splice(index, 1);
+      }
 
       return state;
     },
@@ -38,6 +44,6 @@ const sheetSlice = createSlice({
   },
 });
 
-export const { initObject, insertIndex, removePdp, updatePdp } =
+export const { initObject, removePdp, updatePdp, addSelectedPdp } =
   sheetSlice.actions;
 export default sheetSlice.reducer;

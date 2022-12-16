@@ -1,15 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+type TodoType = {
+  id: string;
+  name: string;
+}
 interface CounterState {
-  todos: string[];
-  newTodo: string;
+  todos: Array<TodoType>;
   nth: number;
   profileSku: string[];
 }
 
 const initialState: CounterState = {
   todos: [],
-  newTodo: "",
   nth: 0,
   profileSku: [],
 };
@@ -19,15 +21,17 @@ const profileSlice = createSlice({
   name: "profile",
   initialState,
   reducers: {
-    addTodo: (state, action: PayloadAction<string>) => {
+    addTodo: (state, action: PayloadAction<TodoType>) => {
       state.todos.push(action.payload);
     },
     removeTodo: (state, action: PayloadAction<number>) => {
       state.todos.splice(action.payload, 1);
     },
     updateTodo: (state, action: PayloadAction<string[]>) => {
-      state.profileSku = action.payload
-      
+      state.profileSku = action.payload  
+    },
+    updateTodo2: (state, action: PayloadAction<TodoType[]>) => {
+      state.todos = action.payload  
     },
     setNewTodo: (state, action: PayloadAction<number>) => {
       state.nth = action.payload;
@@ -41,17 +45,20 @@ const profileSlice = createSlice({
     reset: (state) => {
       // Create a shallow copy of the array using Array.prototype.slice()
       const newArray = state.profileSku.slice();
+      const newArray2 = state.todos.slice();
       // Reset the copied array to an empty array
       newArray.length = 0;
+      newArray2.length = 0;
       // Return a new state object with the reset array
       return {
         ...state,
+        todos: newArray2,
         profileSku: newArray,
       };
     },
   },
 });
 
-export const { addTodo, removeTodo, setNewTodo, setNewSku, reset, removeSku, updateTodo } =
+export const { addTodo, removeTodo, setNewTodo, setNewSku, reset, removeSku, updateTodo, updateTodo2 } =
   profileSlice.actions;
 export default profileSlice.reducer;

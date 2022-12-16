@@ -1,17 +1,19 @@
-.Navigation {
-  background-color: brown;
-  grid-row: 1/1;
-}
 .Main {
   /* background-color:#222; */
   grid-row: 2/8;
 }
-.Footer {
-  /* background-color: black; */
-  grid-row: 7/10;
+.wrapper-md{
+  margin: 50px;
+}
+.sin-botton{
+  background: none;
 }
 .wrapper {
   height: 100vh;
+}
+.hght-nly{
+  height: 60px;
+  margin-top: 30px;
 }
 .a-ref-element {
   color: #ff6347;
@@ -45,6 +47,7 @@
 /* PROFILE */
 .Profile {
   position: relative;
+  background-color: #121212;
 }
 .eby-container {
   display: flex;
@@ -87,12 +90,14 @@
 .br-bttm {
   border: 1px solid white;
   padding: 10px;
+  margin: 3px;
+  border-radius: 5px;
 }
 .skus-main {
   border: 1px solid rgb(185, 185, 185);
   border-radius: 4px;
   padding: 10px;
-  width: 300px;
+  width: 94%;
   margin-top: 6px;
   background-color: rgb(8 86 111);
   cursor: pointer;

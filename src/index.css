@@ -44,6 +44,7 @@ button {
   padding: 0.6em 1.2em;
   font-size: 1em;
   cursor: pointer;
+  background-color: transparent;
 }
 select {
   cursor: pointer;
