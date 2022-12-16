@@ -23,7 +23,6 @@ const sheetSlice = createSlice({
       state,
       action: PayloadAction<{ index: number; description: string[] }>
     ) {
-      console.log(action.payload);
       state[action.payload.index].pdps = action.payload.description;
     },
     removePdp(state, action: PayloadAction<{index:number, id:number}>) {

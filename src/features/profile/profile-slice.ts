@@ -25,6 +25,10 @@ const profileSlice = createSlice({
     removeTodo: (state, action: PayloadAction<number>) => {
       state.todos.splice(action.payload, 1);
     },
+    updateTodo: (state, action: PayloadAction<string[]>) => {
+      state.profileSku = action.payload
+      
+    },
     setNewTodo: (state, action: PayloadAction<number>) => {
       state.nth = action.payload;
     },
@@ -48,6 +52,6 @@ const profileSlice = createSlice({
   },
 });
 
-export const { addTodo, removeTodo, setNewTodo, setNewSku, reset, removeSku } =
+export const { addTodo, removeTodo, setNewTodo, setNewSku, reset, removeSku, updateTodo } =
   profileSlice.actions;
 export default profileSlice.reducer;
