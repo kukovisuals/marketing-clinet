@@ -44,6 +44,7 @@ button {
   padding: 0.6em 1.2em;
   font-size: 1em;
   cursor: pointer;
+  background-color: transparent;
 }
 select {
   cursor: pointer;
@@ -56,4 +57,20 @@ ul{
 }
 li{
   display: block;
+}
+input[type="checkbox"] {
+  /* Style the checkbox */
+  width: 20px;
+  height: 20px;
+  appearance: none;
+  outline: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 7px;
+  cursor: pointer;
+
+}
+  /* Style the checkmark */
+input[type="checkbox"]:checked {
+  background-color: rgb(67 151 91);
 }
