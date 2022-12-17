@@ -72,5 +72,5 @@ input[type="checkbox"] {
 }
   /* Style the checkmark */
 input[type="checkbox"]:checked {
-  background-color: rgb(67 151 91);
+  background-color: #2ea6a6;
 }

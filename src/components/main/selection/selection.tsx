@@ -12,7 +12,6 @@ function Selection() {
     const [value, setValue] = React.useState<Dayjs | null>(null);
     return (
         <div className="Selection">
-            <h2>Selection</h2>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                     label="Select new month"

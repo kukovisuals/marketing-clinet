@@ -88,7 +88,7 @@ function ListProfiles(props: ListProps) {
   const profile = useAppSelector((state) => state.profile);
   const sheet = useAppSelector((state) => state.sheet);
   // ---------------------------------------------------------------
-  const [state, setState] = React.useState({ bottom: false });
+  const [state, setState] = React.useState({ right: false });
   const [main, setMain] = React.useState<TodoType[]>([])
   // ---------------------------------------------------------------
   let newPdps: string[] = []
@@ -119,7 +119,7 @@ function ListProfiles(props: ListProps) {
       ) {
         return;
       }
-      setState({ ...state, ['bottom']: true });
+      setState({ ...state, ['right']: true });
 
       // grab the profile we need to update from sheet-slice
       const updateSku = sheet.find((obj) => obj.id === profIndex)
@@ -158,7 +158,7 @@ function ListProfiles(props: ListProps) {
   // -------------------------------------------------------------
   const list = (anchor: string) => (
     <Box
-      sx={{ width: 'auto' }}
+      sx={{ width: 450 }}
       role="presentation"
     >
       <div className='DrawapiList'>
@@ -177,14 +177,14 @@ function ListProfiles(props: ListProps) {
             </div>
             <div className='hght-nly flx-container-wrp eby-flx-spc-btw'>
               <Button
-                variant="contained"
+                variant="outlined"
                 onClick={toggleDrawer(anchor, false, props.index)}
                 onKeyDown={toggleDrawer(anchor, false, props.index)}
               >
                 <button type="submit" className='sin-botton'>ADD SIZE</button>
               </Button>
               <Button
-                variant="contained"
+                variant="outlined"
                 onClick={handleCheckReset}>
                 Reset
               </Button>
@@ -215,17 +215,19 @@ function ListProfiles(props: ListProps) {
       </div>
 
       <div className="eby-bttm-abs">
+        
         <Button
-          variant="contained"
-          onClick={toggleDrawer('bottom', true, props.index)}>
-          Add
+          variant="outlined"
+          size="large"
+          onClick={toggleDrawer('right', true, props.index)}>
+          <span>ADD</span>
         </Button>
         <Drawer
-          anchor='bottom'
-          open={state['bottom']}
-          onClose={toggleDrawer('bottom', false, props.index)}
+          anchor='right'
+          open={state['right']}
+          onClose={toggleDrawer('right', false, props.index)}
         >
-          {list('bottom')}
+          {list('right')}
         </Drawer>
       </div>
     </div>
