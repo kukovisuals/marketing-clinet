@@ -4,16 +4,27 @@ type TodoType = {
   id: string;
   name: string;
 }
+type MyType<T> = {
+  [key in keyof T]: T[key]
+}
+type DataType = {
+  id: number;
+  size: string;
+  name: string;
+  sku: string;
+}
 interface CounterState {
   todos: Array<TodoType>;
   nth: number;
   profileSku: string[];
+  mainData: DataType[];
 }
 
 const initialState: CounterState = {
   todos: [],
   nth: 0,
   profileSku: [],
+  mainData: []
 };
 
 // define slice container reducer logic
@@ -42,6 +53,9 @@ const profileSlice = createSlice({
     removeSku: (state) => {
       state.profileSku.pop();
     },
+    mainProfileData: (state, action: PayloadAction<DataType>) => {
+      state.mainData.push(action.payload);
+    },
     reset: (state) => {
       // Create a shallow copy of the array using Array.prototype.slice()
       const newArray = state.profileSku.slice();
@@ -59,6 +73,6 @@ const profileSlice = createSlice({
   },
 });
 
-export const { addTodo, removeTodo, setNewTodo, setNewSku, reset, removeSku, updateTodo, updateTodo2 } =
+export const { addTodo, removeTodo, setNewTodo, setNewSku, reset, removeSku, updateTodo, updateTodo2, mainProfileData } =
   profileSlice.actions;
 export default profileSlice.reducer;

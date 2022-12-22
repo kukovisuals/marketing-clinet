@@ -37,7 +37,7 @@ function Upload(props: any) {
   }
   return (
     <div className="Upload">
-      <Button variant="contained" component="label">
+      <Button variant="outlined" component="label">
         Upload
         <input hidden type="file" onChange={handleFileChange} />
       </Button>

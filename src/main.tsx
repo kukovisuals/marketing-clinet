@@ -5,15 +5,17 @@ import './index.css';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import {Provider} from 'react-redux';
-import {store} from './app/store';
+import {store} from './app/store'
 
-const darkTheme = createTheme({
+const theme = createTheme({
   palette: {
-    mode: 'dark',
+    background: {
+      default: '#e8e8e8',
+    }
   },
 });
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <ThemeProvider theme={darkTheme}>
+  <ThemeProvider theme={theme}>
     <CssBaseline />
     <Provider store={store}>
       <App />

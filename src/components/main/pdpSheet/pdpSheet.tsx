@@ -3,16 +3,12 @@ import Upload from '../upload/upload';
 
 function PdpSheet() {
   const [profile, setProfile] = React.useState<string[]>([]);
-
-  // grab CSV data
   const handleChildData = (data: string[]) => {
-    // console.log(data)
     setProfile(data)
   }
 
   return (
     <div className="Profile">
-      <h2>Upload</h2>
       <Upload onData={handleChildData} />
       <div className='sheet-block'>
         {profile && profile.map((d: string, i: number) =>
