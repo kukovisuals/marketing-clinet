@@ -1,17 +1,23 @@
 .Upload {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 100%;
 }
 .Selection {
-  border: 1px solid black;
   width: 100%;
+  padding-bottom: 24px;
+}
+.eby-inpt-spce{
+  margin-left: 20px;
 }
 .eby-header-style {
-  background-color: rgb(13, 32, 198);
+  background-color: #6e7f8d;
+    color: white;
+    font-size: 0.7rem;
 }
 .eby-row-color-light {
-  background-color: cornflowerblue;
+  background-color: #FFF;
 }
 .eby-row-color-dark {
-  background-color: rgb(9, 134, 151);
+  
+  background-color: #eff2f9;
 }
