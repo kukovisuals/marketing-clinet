@@ -42,7 +42,7 @@
 .flx-container-wrp {
   display: flex;
   flex-wrap: wrap;
-  max-height: 83vh;
+  max-height: 69vh;
   overflow-x: hidden;
 }
 /* UPLOAD */
@@ -85,6 +85,9 @@ box-shadow:  5px 5px 10px #c5c5c5,
 .eby-sheet-sm {
   width: 9%;
 }
+.eby-sheet-1, .eby-sheet-sm, .eby-sheet-lg{
+  font-size: 0.5rem;
+}
 .eby-sheet-lg {
   width: 24%;
 }
@@ -99,10 +102,12 @@ box-shadow:  5px 5px 10px #c5c5c5,
   font-size: 0.8rem;
 }
 .width-flex-sm {
-  width: 70px;
+  /* width: auto; */
+}
+.css-ve9ogo{
+  width: 562px;
 }
 .br-bttm {
-  padding: 10px;
   margin: 3px;
   border-radius: 5px;
 }

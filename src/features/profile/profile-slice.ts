@@ -3,28 +3,30 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 type TodoType = {
   id: string;
   name: string;
-}
+};
 type MyType<T> = {
-  [key in keyof T]: T[key]
-}
+  [key in keyof T]: T[key];
+};
 type DataType = {
   id: number;
   size: string;
   name: string;
   sku: string;
-}
+};
 interface CounterState {
   todos: Array<TodoType>;
   nth: number;
   profileSku: string[];
   mainData: DataType[];
+  isUpload: boolean;
 }
 
 const initialState: CounterState = {
   todos: [],
   nth: 0,
   profileSku: [],
-  mainData: []
+  mainData: [],
+  isUpload: false,
 };
 
 // define slice container reducer logic
@@ -39,10 +41,10 @@ const profileSlice = createSlice({
       state.todos.splice(action.payload, 1);
     },
     updateTodo: (state, action: PayloadAction<string[]>) => {
-      state.profileSku = action.payload  
+      state.profileSku = action.payload;
     },
     updateTodo2: (state, action: PayloadAction<TodoType[]>) => {
-      state.todos = action.payload  
+      state.todos = action.payload;
     },
     setNewTodo: (state, action: PayloadAction<number>) => {
       state.nth = action.payload;
@@ -70,9 +72,22 @@ const profileSlice = createSlice({
         profileSku: newArray,
       };
     },
+    isUpload: (state, action: PayloadAction<boolean>) => {
+      state.isUpload = action.payload;
+    },
   },
 });
 
-export const { addTodo, removeTodo, setNewTodo, setNewSku, reset, removeSku, updateTodo, updateTodo2, mainProfileData } =
-  profileSlice.actions;
+export const {
+  addTodo,
+  removeTodo,
+  setNewTodo,
+  setNewSku,
+  reset,
+  removeSku,
+  updateTodo,
+  updateTodo2,
+  mainProfileData,
+  isUpload,
+} = profileSlice.actions;
 export default profileSlice.reducer;
