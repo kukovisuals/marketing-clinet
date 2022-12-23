@@ -1,10 +1,10 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { addTodo, setNewSku, removeSku } from "../../features/profile/profile-slice";
-import { ListProps2 } from '../../utilities/profileTypes';
+import { DataType } from '../../utilities/profileTypes';
 
-function DrawApiList(props: ListProps2) {
-  const { name, size, available, id }: ListProps2 = props;
+function DrawApiList(props: DataType) {
+  const { name, size, sizeId, id, sku }: DataType = props;
   // create a ref to store a reference to the checkbox element
   const checkboxRef = React.useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
@@ -46,11 +46,12 @@ function DrawApiList(props: ListProps2) {
         // checked={isChecked}
         onChange={onChange}
         name={String(id)}
-        value={name + '::' + size}
+        value={sku + '::' + sizeId}
       />
       <span className='width-flex-md' >{name}</span>
-      <span className='width-flex-sm'>Size: {size}</span>
-      <span className='width-flex-sm'>{available} available</span>
+      <span className='width-flex-sm'>{sku}</span>
+      <span className='width-flex-sm'>:: {sizeId}</span>
+      {/* <span className='width-flex-sm'>{size}</span> */}
     </div>
   );
 }

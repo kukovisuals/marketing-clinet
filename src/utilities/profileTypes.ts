@@ -1,26 +1,28 @@
+export type TodoType = {
+  id: string;
+  name: string;
+};
+
+export type CounterState = {
+  id: number;
+  name: string;
+  newProfile: TodoType[];
+}
 export type DataType = {
   id: number;
   size: string;
   name: string;
   sku: string;
+  sizeId?: number;
 };
 
-export type TodoType = {
-  id: string;
-  name: string;
-};
 export type ListProps = {
   data: string;
   pdps?: string[];
-  pdps2?: TodoType[];
+  newProfile?: TodoType[];
   index: number;
 };
-export type ListProps2 = {
-  id: number;
-  name: string;
-  size: string;
-  available: string;
-};
+
 export type CheckType = {
   id: string;
   isCheck: boolean;

@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
+interface Data {
+  // define the shape of your data here
+  [index: string]: any;
+}
+
 interface Props {
-  uri: string;
+  url: string;
   method?: 'GET' | 'POST' | 'DELETE' | 'PATCH';
   body?: any;
 }
@@ -13,11 +18,10 @@ interface ReturnValue {
   request: () => void;
 }
 
-const url = 'http://localhost:3001';
 
 function useFetch(props: Props): ReturnValue {
-  const { uri, method = 'GET', body = null } = props;
-  const [data, setData] = useState<any | null>(null);
+  const { url, method = 'GET', body = null } = props;
+  const [data, setData] = useState<Data | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -31,7 +35,7 @@ function useFetch(props: Props): ReturnValue {
           'Content-Type': 'application/json',
         };
       }
-      const response = await fetch(url+uri, options);
+      const response = await fetch(url, options);
       const data = await response.json();
       // console.log(data)
       setData(data);

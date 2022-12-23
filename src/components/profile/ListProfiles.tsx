@@ -35,8 +35,8 @@ function ListProfiles(props: ListProps) {
   const [filterMain, setFilterMain] = React.useState<DataType[]>([]);
   // ---------------------------------------------------------------
   React.useEffect(() => {
-    if (props.pdps2) setMain(props.pdps2)
-  }, [props.pdps2])
+    if (props.newProfile) setMain(props.newProfile)
+  }, [props.newProfile])
   // ---------------------------------------------------------------
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.value)
@@ -81,7 +81,7 @@ function ListProfiles(props: ListProps) {
         }
         setState({ ...state, [anchor]: open });
         newTodoNth(index)
-        const filterData = profile.mainData.filter((value: DataType, index: number) =>
+        const filterData = profile.mainData.filter((value: any, index: number) =>
           value.size == pSize
         )
         setFilterMain(filterData)
@@ -106,7 +106,6 @@ function ListProfiles(props: ListProps) {
     >
       <div className='DrawapiList'>
         <div className='wrapper-md'>
-
           <div className='input-filter'>
             <input
               type="text"
@@ -122,7 +121,8 @@ function ListProfiles(props: ListProps) {
                   name={d.name}
                   size={d.size}
                   id={d.id}
-                  available={d.available}
+                  sku={d.sku}
+                  sizeId={d.sizeId}
                 />
               )}
             </div>
@@ -132,14 +132,13 @@ function ListProfiles(props: ListProps) {
                 onClick={toggleDrawer(anchor, false, props.index, newSize)}
                 onKeyDown={toggleDrawer(anchor, false, props.index, newSize)}
               >
-                <button type="submit" className='sin-botton'>ADD SIZE</button>
+                <button type="submit" className='sin-botton'>ADD {newSize}</button>
               </Button>
               <Button
                 variant="outlined">
                 Reset
               </Button>
             </div>
-
           </form>
         </div>
       </div>
@@ -165,7 +164,6 @@ function ListProfiles(props: ListProps) {
       </div>
 
       <div className="eby-bttm-abs">
-
         <Button
           variant="outlined"
           size="large"
