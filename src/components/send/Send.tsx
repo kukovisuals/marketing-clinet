@@ -4,6 +4,8 @@ import { useAppSelector } from '../../app/hooks';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 
+import useFetch from "../useFetch/useFetch";
+
 const CustomButtonWhite = styled(Button)`
 height: 55px;
 border: 1px solid #FFF;
@@ -23,7 +25,11 @@ function Send() {
   const sheet = useAppSelector((state) => state.sheet);
   const [loadModal, setLoadModal] = React.useState(false);
   const [profilesModified, setProfilesModified] = React.useState(0);
-
+  /*  
+    ****************************************************************
+    * Handle Errors if data is empty
+    ****************************************************************
+  */
   const handleSend = () => {
     console.log('im live')
     // we have to grab the sheet from redux
@@ -31,7 +37,6 @@ function Send() {
     if (!pass) return
     // Grab the data that has info in it
     const hasData = sheet.filter((d: any, i: number) => d.pdps2.length > 0)
-    console.log(hasData)
     setProfilesModified(hasData.length)
     // create a modal to notify the user how many changes they are about to make
     setLoadModal(true)
@@ -61,18 +66,50 @@ type ModalProps = {
   profilesModified: number;
   setLoadModal: React.Dispatch<React.SetStateAction<boolean>>
 }
-
 function LoadModal({ loadModal, setLoadModal, profilesModified }: ModalProps) {
+  const [sendData, setSendData] = React.useState<any>([]);
+  const sheet = useAppSelector((state) => state.sheet);
+
+  const grabMonth = useAppSelector((state) => state.profile.currentMonth)
   /*  
     ****************************************************************
-    * CRUD method to modified the database
-    *  Let the user know changes have been made
+    * CRUD operations to modify the database
+    * Lets send the profiles with data to the backend
     ****************************************************************
   */
-  const handleYes = () => {
+ const uri = `/api/monthViews/${grabMonth}/profiles/`
+  const url = 'http://localhost:3001';
+  const handleYes = async () => {
+    // Grab the data that has info in it
+    const hasData = sheet.filter((d: any, i: number) => d.pdps2.length > 0)
+    console.log(hasData)
+    setSendData(hasData)
+    console.log('when is run ')
+    try {
+      const options = { method: 'POST', body:'', headers: {} };
+      options.body = JSON.stringify(hasData);
+      console.log(options.body)
+      options.headers = {
+        'Content-Type': 'application/json',
+      };
+
+      const response = await fetch(url + uri, options);
+      const data = await response.json();
+      console.log('data -> ', data)
+    } catch (err) {
+      console.error('post request', err)
+    }
+
     alert('🙌 Yay! You have made some changes to the Database 😃')
     setLoadModal(false)
   }
+
+  /*  
+    ****************************************************************
+    * DON'T modify the database
+    *  Add some message to user to help her out
+    ****************************************************************
+  */
   const handleNo = () => {
     alert('😀 Always good to double check 👍')
     setLoadModal(false)

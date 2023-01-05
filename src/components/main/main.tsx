@@ -4,6 +4,7 @@ import PdpSheet from './pdpSheet/pdpSheet';
 import useFetch from '../useFetch/useFetch';
 import { useAppDispatch } from '../../app/hooks';
 import { initObject } from "../../features/month/month-slice";
+import { setCurrentMonth } from '../../features/profile/profile-slice';
 import './main.css';
 
 function Main() {
@@ -11,12 +12,13 @@ function Main() {
   const mvid = `${year}-${month}`
   console.log('--------------------')
   console.log(mvid)
-
+  
   const uri = `/api/monthViews/${mvid}`
   const { data, isLoading, error } = useFetch({ uri, method: 'GET' });
 
   const dispatch = useAppDispatch()
 
+  dispatch(setCurrentMonth(mvid))
   async function retrieveMonth() {
     const newMonth = await data[0].profiles
     console.log('main => ', data[0].profiles)

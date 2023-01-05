@@ -19,6 +19,7 @@ interface CounterState {
   profileSku: string[];
   mainData: DataType[];
   isUpload: boolean;
+  currentMonth: string;
 }
 
 const initialState: CounterState = {
@@ -27,6 +28,7 @@ const initialState: CounterState = {
   profileSku: [],
   mainData: [],
   isUpload: false,
+  currentMonth: ''
 };
 
 // define slice container reducer logic
@@ -79,6 +81,9 @@ const profileSlice = createSlice({
       const newObj = action.payload;
       console.log('redux',newObj)
     },
+    setCurrentMonth: (state, action: PayloadAction<string>) =>{
+      state.currentMonth = action.payload;
+    }
   },
 });
 
@@ -93,5 +98,6 @@ export const {
   updateTodo2,
   mainProfileData,
   isUpload,
+  setCurrentMonth
 } = profileSlice.actions;
 export default profileSlice.reducer;
