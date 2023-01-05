@@ -31,6 +31,8 @@ function useFetch(props: Props): ReturnValue {
           'Content-Type': 'application/json',
         };
       }
+      console.log('url -----------')
+      console.log(url, uri)
       const response = await fetch(url+uri, options);
       const data = await response.json();
       // console.log(data)

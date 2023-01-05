@@ -3,10 +3,19 @@ type TodoType = {
   id: string;
   name: string;
 }
+interface DragType {
+  obj: TodoType | null;
+  objId: number
+}
+interface DragArrayType {
+  obj: TodoType[];
+  objId: number;
+}
 interface CounterState {
   id: number;
   name: string;
   pdps2: TodoType[];
+  draggedItem: TodoType | null;
 }
 
 const initialState: Array<CounterState> = [];
@@ -20,6 +29,7 @@ const sheetSlice = createSlice({
         id: action.payload.id,
         name: action.payload.name,
         pdps2:[],
+        draggedItem:null
       });
     },
     addSelectedPdp(
@@ -40,10 +50,40 @@ const sheetSlice = createSlice({
 
       return state;
     },
-    updatePdp(state, action: PayloadAction<{index:number, id:number}>) {},
+    updateDrag(state, action: PayloadAction<{index:number, id:number, to:number}>) {
+    //   const a = [0,1,2,3,4,5,6]
+    // const b = a.filter((a:any, index:any)=> index != 2)
+    // const x = b.slice(0,4)
+    // const y = a.slice(5)
+    // setPlay([
+    //   ...x,
+    //   a[2],
+    //   ...y
+    // ])
+    const {index, id, to} = action.payload
+
+      let getCopy = state[id].pdps2
+      const a = getCopy.filter((a:any, index:number) => index != index)
+      const x = a.slice(0,to)
+      const y = getCopy.slice(to + 1)
+      const z = [
+        ...x,
+        state[id].pdps2[index],
+        ...y
+      ]
+      state[id].pdps2 = z
+    },
+    setDraggedItem: (state, action: PayloadAction<DragType>) => {
+      const {obj, objId} = action.payload
+      state[objId].draggedItem = obj;
+    },
+    setItemsDragged: (state, action: PayloadAction<DragArrayType>) => {
+      const {obj, objId} = action.payload
+      state[objId].pdps2 = obj;
+    },
   },
 });
 
-export const { initObject, removePdp, updatePdp, addSelectedPdp } =
+export const { initObject, removePdp, updateDrag, addSelectedPdp, setDraggedItem, setItemsDragged } =
   sheetSlice.actions;
 export default sheetSlice.reducer;

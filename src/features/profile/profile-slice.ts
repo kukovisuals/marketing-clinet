@@ -75,6 +75,10 @@ const profileSlice = createSlice({
     isUpload: (state, action: PayloadAction<boolean>) => {
       state.isUpload = action.payload;
     },
+    dragRdx: (state, action: PayloadAction<any>) => {
+      const newObj = action.payload;
+      console.log('redux',newObj)
+    },
   },
 });
 

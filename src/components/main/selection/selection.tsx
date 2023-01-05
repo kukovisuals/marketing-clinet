@@ -10,6 +10,8 @@ import { initObject, restartMonth } from "../../../features/month/month-slice";
 import { isUpload } from "../../../features/profile/profile-slice";
 import { styled } from '@mui/material/styles';
 
+import Send from '../../send/Send';
+
 import './selection.css'
 
 const CustomizeTextField = styled(TextField)`
@@ -51,7 +53,7 @@ function Selection() {
     dispatch(isUpload(isLoad))
 
   }
- 
+
   async function makePostRequest() {
     try {
       const formatDay = `${newDate.year}-${newDate.month}`;
@@ -60,7 +62,7 @@ function Selection() {
       setResponse(res.data);
       const newMonth = res.data.profiles
       console.log('clear month ------>')
-      
+
       dispatch(restartMonth())
       for (let i = 0; i < newMonth.length; i++) {
 
@@ -70,7 +72,7 @@ function Selection() {
       console.error(error);
     }
   }
- 
+
   return (
     <div className="Selection">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -93,7 +95,7 @@ function Selection() {
               </CustomButton>
             </div>
           </div>
-        
+          <Send />
         </div>
       </LocalizationProvider>
     </div>

@@ -18,6 +18,9 @@ body,
 html {
   box-sizing: border-box;
 }
+h1,h2,h3,h4{
+  margin:10px 0;
+}
 a {
   font-weight: 500;
   color: #646cff;
@@ -74,4 +77,11 @@ input[type="checkbox"] {
   /* Style the checkmark */
 input[type="checkbox"]:checked {
   background-color: #2ea6a6;
+}
+input[type="text"] {
+  color:black;
+  padding-left: 10px;
+}
+input::placeholder {
+  color: rgb(83, 83, 83);
 }

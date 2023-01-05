@@ -14,6 +14,10 @@
 .sin-botton {
   background: none;
   height: 100%;
+  color: #000;
+}
+.sin-botton:hover{
+  color:#1976d2;
 }
 .wrapper {
   height: 100vh;
@@ -65,7 +69,7 @@
   flex-wrap: wrap;
 }
 .eby-list {
-  width: 18.9%;
+  width: 17.9%;
   position: relative;
   min-height: 111px;
   padding: 16px 20px 41px;
@@ -94,12 +98,12 @@ box-shadow:  5px 5px 10px #c5c5c5,
 .eby-bttm-abs {
   bottom: 5px;
   position: absolute;
-  left: 50%;
+  left: 32%;
   transform: translate(-50%);
 }
 .width-flex-md {
   width: 150px;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 .width-flex-sm {
   /* width: auto; */
@@ -110,13 +114,14 @@ box-shadow:  5px 5px 10px #c5c5c5,
 .br-bttm {
   margin: 3px;
   border-radius: 5px;
+  width: 47%;;
 }
 .skus-main {
   border-bottom: 1px solid rgb(98 98 98);
   border-radius: 4px;
   padding: 10px;
   width: 94%;
-  margin-top: 6px;
+  /* margin-top: 6px; */
   cursor: pointer;
 }
 .skus-main:hover {
@@ -137,6 +142,7 @@ box-shadow:  5px 5px 10px #c5c5c5,
 .name-update {
   width: 242px;
   /* border: 1px solid; */
+  font-size: 0.5rem;
 }
 /* filter */
 .input-filter {
@@ -146,7 +152,32 @@ box-shadow:  5px 5px 10px #c5c5c5,
   width: 100%;
   height: 31px;
   border-radius: 4px;
-  background: #e8e8e8;
-  box-shadow: inset 5px 5px 10px #c5c5c5, inset -5px -5px 10px #ffffff;
+  background: #e0e0e0;
+box-shadow: inset 20px 20px 60px #bebebe,
+            inset -20px -20px 60px #ffffff;
   border: none;
+}
+
+/* MODAL */
+.Modal{
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, 0%);
+}
+.modal-style{
+  z-index: 1;
+  width: 450px;
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: #6f0861;
+}
+.modal-margin{
+  margin: 20px;
+}
+.modal-buttons{
+  margin-top: 10px ;
+}
+.modal-title{
+  color:#FFF;
 }

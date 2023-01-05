@@ -39,7 +39,6 @@ function DrawApiList(props: DataType) {
   // -------------------------------------------------------------
   return (
     <div className='eby-sm-flex br-bttm'>
-
       <input
         ref={checkboxRef}
         type='checkbox'
@@ -49,9 +48,9 @@ function DrawApiList(props: DataType) {
         value={sku + '::' + sizeId}
       />
       <span className='width-flex-md' >{name}</span>
-      <span className='width-flex-sm'>{sku}</span>
-      <span className='width-flex-sm'>:: {sizeId}</span>
-      {/* <span className='width-flex-sm'>{size}</span> */}
+      {/* <span className='width-flex-sm'>{sku}</span>
+      <span className='width-flex-sm'>:: {sizeId}</span> */}
+      <span className='width-flex-sm'>{size}</span>
     </div>
   );
 }

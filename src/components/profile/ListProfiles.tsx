@@ -5,10 +5,41 @@ import Box from '@mui/material/Box';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { setNewTodo, reset, updateTodo2 } from "../../features/profile/profile-slice";
-import { removePdp, updatePdp, addSelectedPdp } from "../../features/sheet/sheet-slice";
+import { removePdp, updateDrag, addSelectedPdp } from "../../features/sheet/sheet-slice";
 import { DataType, TodoType, ListProps } from '../../utilities/profileTypes';
 
+import useDragAndDrop from '../useDragAndDrop/useDragAndDrop';
 import DrawApiList from './DrawApiList';
+import { styled } from '@mui/material/styles';
+const CuatomBox = styled(Box)`
+  width: 50%;
+`;
+const ButtonProfile = styled(Button)`
+  color: #000000;
+  border: 1px solid gray;
+  &:hover{
+    color: #1976d2;
+  }
+`;
+const ButtonCheckbox = styled(Button)`
+  padding:0;
+
+  border: 1px solid gray;
+`;
+type Somethign = {
+  draggedFrom: number,
+  draggedTo: number,
+  isDragging: boolean,
+  originalOrder: TodoType[],
+  updatedOrder: TodoType[],
+}
+const initialDndState: Somethign = {
+  draggedFrom: 0,
+  draggedTo: 0,
+  isDragging: false,
+  originalOrder: [],
+  updatedOrder: [],
+}
 /* -----------------------------------------------------------------
     List of Profiles Setup the dummy data to all profiles 
     Add buttons to each of them 
@@ -16,6 +47,14 @@ import DrawApiList from './DrawApiList';
 */
 // -----------------------------------------------------------------
 function ListProfiles(props: ListProps) {
+  const myRef = React.useRef<HTMLLIElement>(null);
+  const [stateDrag, setSateDrag] = React.useState({
+    id: 0,
+    index: 0
+  })
+  const [dragAndDrop, setDragAndDrop] = React.useState(initialDndState);
+
+  const [play, setPlay] = React.useState([1, 2, 3, 4, 5, 6])
 
   const [todoNth, newTodoNth] = React.useState(0)
 
@@ -33,6 +72,15 @@ function ListProfiles(props: ListProps) {
     newSize = props.data.split(') in ')[1]
   }
   const [filterMain, setFilterMain] = React.useState<DataType[]>([]);
+
+  const [testItem, setTestItem] = React.useState<{id: string, profiles: TodoType}[]>([]);
+  // ---------------------------------------------------------------
+  /*
+     main drag and drop fix the initial state 
+     should be the index of the card grabbed
+  */
+  const { profileItems, itemIndex, setItemIndex, handleDragStart, handleDragOver } = useDragAndDrop();
+  
   // ---------------------------------------------------------------
   React.useEffect(() => {
     if (props.newProfile) setMain(props.newProfile)
@@ -44,66 +92,64 @@ function ListProfiles(props: ListProps) {
   }
   const filteredItems = filterMain.filter(item => item.name.toLowerCase().includes(newSearch.toLowerCase()));
   const handleRemove = (index: number, profIndex: number) =>
-    (event: React.MouseEvent<HTMLElement>) => {
-      // Grab the index and find it in shee-slice
-      dispatch(removePdp({ index, id: profIndex }));
-      console.log(event.target, index, ' profile ', profIndex)
-    }
+  (event: React.MouseEvent<HTMLElement>) => {
+    // Grab the index and find it in shee-slice
+    dispatch(removePdp({ index, id: profIndex }));
+    console.log(event.target, index, ' profile ', profIndex)
+  }
   // ---------------------------------------------------------------
   const handleUpdate = (index: number, profIndex: number) =>
-    (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        event.type === 'keydown' &&
-        ((event as React.KeyboardEvent).key === 'Tab' ||
-          (event as React.KeyboardEvent).key === 'Shift')
+  (event: React.KeyboardEvent | React.MouseEvent) => {
+    if (
+      event.type === 'keydown' &&
+      ((event as React.KeyboardEvent).key === 'Tab' ||
+      (event as React.KeyboardEvent).key === 'Shift')
       ) {
         return;
       }
       setState({ ...state, ['right']: true });
-
+      
       // grab the profile we need to update from sheet-slice
       const updateSku = sheet.find((obj) => obj.id === profIndex)
       // update profile-slice sku
       if (updateSku) dispatch(updateTodo2(updateSku.pdps2))
-      // Grab the index and find it in shee-slice
-      dispatch(updatePdp({ index, id: profIndex }));
     }
-  // -------------------------------------------------------------
-  const toggleDrawer =
+    // -------------------------------------------------------------
+    const toggleDrawer =
     (anchor: string, open: boolean, index: number, pSize: string) =>
-      (event: React.KeyboardEvent | React.MouseEvent) => {
-        if (
-          event.type === 'keydown' &&
-          ((event as React.KeyboardEvent).key === 'Tab' ||
-            (event as React.KeyboardEvent).key === 'Shift')
+    (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event.type === 'keydown' &&
+        ((event as React.KeyboardEvent).key === 'Tab' ||
+        (event as React.KeyboardEvent).key === 'Shift')
         ) {
           return;
         }
         setState({ ...state, [anchor]: open });
         newTodoNth(index)
         const filterData = profile.mainData.filter((value: any, index: number) =>
-          value.size == pSize
+        value.size == pSize
         )
         setFilterMain(filterData)
         // add the todo with its corresponding index
         dispatch(setNewTodo(todoNth));
       };
-  // -------------------------------------------------------------
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // add the todo with its corresponding index
-    dispatch(setNewTodo(todoNth));
-    // concat the checked items to the profiles 
-    dispatch(addSelectedPdp({ index: todoNth, description: profile.todos }))
-    // clear the profile skus from the from 
-    dispatch(reset())
-  };
-  // -------------------------------------------------------------
-  const list = (anchor: string) => (
-    <Box
-      sx={{ width: 450 }}
-      role="presentation"
-    >
+      // -------------------------------------------------------------
+      const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        // add the todo with its corresponding index
+        dispatch(setNewTodo(todoNth));
+        // concat the checked items to the profiles 
+        dispatch(addSelectedPdp({ index: todoNth, description: profile.todos }))
+        // clear the profile skus from the from 
+        dispatch(reset())
+      };
+      // -------------------------------------------------------------
+      const list = (anchor: string) => (
+        <CuatomBox
+        sx={{ width: '450px' }}
+        role="presentation"
+        >
       <div className='DrawapiList'>
         <div className='wrapper-md'>
           <div className='input-filter'>
@@ -112,50 +158,72 @@ function ListProfiles(props: ListProps) {
               placeholder='search'
               onChange={handleSearch}
               value={newSearch}
-            />
+              />
           </div>
           <form onSubmit={onSubmit}>
             <div className='flx-container-wrp'>
               {filteredItems.map((d: any, i: number) =>
                 <DrawApiList
-                  name={d.name}
-                  size={d.size}
-                  id={d.id}
-                  sku={d.sku}
-                  sizeId={d.sizeId}
+                name={d.name}
+                size={d.size}
+                id={d.id}
+                sku={d.sku}
+                sizeId={d.sizeId}
                 />
-              )}
+                )}
             </div>
             <div className='hght-nly flx-container-wrp eby-flx-spc-btw'>
-              <Button
+              <ButtonCheckbox
                 variant="outlined"
                 onClick={toggleDrawer(anchor, false, props.index, newSize)}
                 onKeyDown={toggleDrawer(anchor, false, props.index, newSize)}
-              >
+                >
                 <button type="submit" className='sin-botton'>ADD {newSize}</button>
-              </Button>
-              <Button
-                variant="outlined">
-                Reset
-              </Button>
+              </ButtonCheckbox>
             </div>
           </form>
         </div>
       </div>
-    </Box>
+    </CuatomBox>
   );
-  // -----------------------------------------------------------------------------
+  
+  // ---------------------------------------------------------------
+  React.useEffect(() => {
+    if(main.length > 0){
+      const newItems = {id: props.index, profiles: main}
+      setTestItem( prev => ({
+        ...prev, 
+        id: props.index,
+        profiles : main
+      }))
+      console.log(testItem)
+    }
+    setItemIndex(props.index)
+  },[main])
+  
+  // console.log('---------------------------------------------------------------')
+  // console.log(profileItems, itemIndex)
+  // console.log('---------------------------------------------------------------')
   return (
     <div className="eby-list">
       <div>
         <span className='title-md'>{props.data}</span>
+        <h3>{props.index}</h3>
       </div>
       <div>
+
         <ul className='ul-list'>
-          {main && main.map((d: any, i: number) =>
-            <li className="skus-main" key={d.id + i}>
+          {profileItems.length > 0 && profileItems.map((item: any, i: number) =>
+            <li
+              key={item.id}
+              draggable
+              onDragStart={e => handleDragStart(e, i, props.index)}
+              onDragOver={() => handleDragOver(i, props.index)}
+              className="skus-main"
+              data-profileId={i}
+            >
               <div className='eby-sm-flex eby-flx-spc-btw'>
-                <span className='name-update' onClick={handleUpdate(i, props.index)}>{d.name}</span>
+                <span className='name-update' onClick={handleUpdate(i, props.index)}>{item.name}</span>
                 <span className='x-remove' onClick={handleRemove(i, props.index)}>X</span>
               </div>
             </li>
@@ -164,12 +232,12 @@ function ListProfiles(props: ListProps) {
       </div>
 
       <div className="eby-bttm-abs">
-        <Button
+        <ButtonProfile
           variant="outlined"
-          size="large"
+          size="small"
           onClick={toggleDrawer('right', true, props.index, newSize)}>
           <span>ADD {newSize}</span>
-        </Button>
+        </ButtonProfile>
         <Drawer
           anchor='right'
           open={state['right']}

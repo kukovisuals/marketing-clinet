@@ -11,6 +11,7 @@ import { DataType } from '../../utilities/profileTypes';
 */
 
 const url = 'https://api.join-eby.com/other/subcal/get_products.php'
+// const url = 'http://localhost:5173/products.json'
 
 function Profile() {
   const sheet = useAppSelector((state) => state.sheet);
@@ -45,7 +46,6 @@ function Profile() {
           }
           dispatch(mainProfileData(newField))
           k++
-
         }
       }
     }
