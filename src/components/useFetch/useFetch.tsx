@@ -8,6 +8,7 @@ interface Props {
 
 interface ReturnValue {
   data: any | null;
+  setData: any;
   error: Error | null;
   isLoading: boolean;
   request: () => void;
@@ -31,9 +32,11 @@ function useFetch(props: Props): ReturnValue {
           'Content-Type': 'application/json',
         };
       }
+      console.log('url -----------')
+      console.log(url, uri)
       const response = await fetch(url+uri, options);
       const data = await response.json();
-      // console.log(data)
+      console.log('data -> ', data)
       setData(data);
     } catch (error) {
       if (error instanceof Error)
@@ -46,7 +49,7 @@ function useFetch(props: Props): ReturnValue {
     request();
   }, [method, body]);
 
-  return { data, error, isLoading, request };
+  return { data, setData, error, isLoading, request };
 }
 
 export default useFetch;

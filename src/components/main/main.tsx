@@ -4,20 +4,24 @@ import PdpSheet from './pdpSheet/pdpSheet';
 import useFetch from '../useFetch/useFetch';
 import { useAppDispatch } from '../../app/hooks';
 import { initObject } from "../../features/month/month-slice";
+import { setCurrentMonth } from '../../features/profile/profile-slice';
 import './main.css';
 
 function Main() {
   const [year, month] = formatDay()
   const mvid = `${year}-${month}`
-
+  console.log('--------------------')
+  console.log(mvid)
+  
   const uri = `/api/monthViews/${mvid}`
   const { data, isLoading, error } = useFetch({ uri, method: 'GET' });
 
   const dispatch = useAppDispatch()
 
+  dispatch(setCurrentMonth(mvid))
   async function retrieveMonth() {
-    console.log('main => ', data.profiles)
-    const newMonth = await data.profiles
+    const newMonth = await data[0].profiles
+    console.log('main => ', data[0].profiles)
     for (let i = 0; i < newMonth.length; i++) {
       dispatch(initObject({ id: i, name: newMonth[i] }))
     }
@@ -35,8 +39,7 @@ function Main() {
   if (error) {
     return <p>Error: {error.message}</p>;
   }
-
-  console.log(mvid)
+ 
   return (
     <div className="Main">
       <Selection />
@@ -50,7 +53,7 @@ function formatDay() {
   const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
   const yyyy = today.getFullYear();
 
-  return [yyyy, +mm];
+  return [yyyy, mm];
 }
 
 export default Main
