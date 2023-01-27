@@ -3,7 +3,8 @@ import Selection from './selection/selection';
 import PdpSheet from './pdpSheet/pdpSheet';
 import useFetch from '../useFetch/useFetch';
 import { useAppDispatch } from '../../app/hooks';
-import { initObject } from "../../features/month/month-slice";
+// import { initObject } from "../../features/month/month-slice";
+import { initObject, restartMonth } from "../../features/month/month-slice";
 import { setCurrentMonth } from '../../features/profile/profile-slice';
 import './main.css';
 
@@ -22,13 +23,20 @@ function Main() {
 
   const retrieveMonth = async () => {
     console.log('------ main.tsx ------')
+    console.log('Main data coming from -> ', uri)
     console.log(data)
+    console.log('------ end main.tsx ------')
     if (typeof data == 'object' && data != null) {
       const newMonth = await data[0].profiles
       console.log('main => ', data[0].profiles)
+      dispatch(restartMonth())
       for (let i = 0; i < newMonth.length; i++) {
-        await dispatch(initObject({ id: i, name: newMonth[i] }))
+
+        dispatch(initObject({ id: i, name: newMonth[i] }))
       }
+      // for (let i = 0; i < newMonth.length; i++) {
+      //   await dispatch(initObject({ id: i, name: newMonth[i] }))
+      // }
     }
   }
   React.useEffect(() => {

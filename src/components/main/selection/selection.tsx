@@ -5,11 +5,11 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import axios from 'axios';
 import Button from '@mui/material/Button';
-import { useAppDispatch } from '../../../app/hooks';
-import { initObject, restartMonth } from "../../../features/month/month-slice";
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { initObject } from "../../../features/sheet/sheet-slice";
 import { isUpload } from "../../../features/profile/profile-slice";
 import { styled } from '@mui/material/styles';
-
+import ListProfiles from '../../profile/ListProfiles';
 import Send from '../../send/Send';
 
 import './selection.css'
@@ -24,7 +24,7 @@ const CustomButton = styled(Button)`
 `;
 
 function Selection() {
-
+  const sheet = useAppSelector((state) => state.sheet);
   const dispatch = useAppDispatch();
 
   const [value, setValue] = React.useState<Date | null>(new Date());
@@ -64,17 +64,21 @@ function Selection() {
       setResponse(res.data);
       const newMonth = res.data[0].profiles
       console.log('selection.tsx meakepost request ------>', newMonth)
-
-      dispatch(restartMonth())
+      
       for (let i = 0; i < newMonth.length; i++) {
 
-        dispatch(initObject({ id: i, name: newMonth[i] }))
+        for(const sizeK of Object.keys(newMonth[i].sizes[0]) ){
+
+          console.log('sheet new month=> ', i,  newMonth[i].name + sizeK )      
+          dispatch(initObject({ id: i, name: newMonth[i].name + ' in ' + sizeK }))
+        }
       }
     } catch (error) {
       console.error(error);
     }
   }
 
+  console.log('sheet => ', sheet)
   return (
     <div className="Selection">
       <LocalizationProvider dateAdapter={AdapterDayjs}>

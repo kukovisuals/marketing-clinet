@@ -25,6 +25,7 @@ const sheetSlice = createSlice({
   initialState,
   reducers: {
     initObject(state, action: PayloadAction<{ id: number; name: string }>) {
+      console.log('redux sheet ', action.payload.id, action.payload.name)
       state.push({
         id: action.payload.id,
         name: action.payload.name,
@@ -51,15 +52,7 @@ const sheetSlice = createSlice({
       return state;
     },
     updateDrag(state, action: PayloadAction<{index:number, id:number, to:number}>) {
-    //   const a = [0,1,2,3,4,5,6]
-    // const b = a.filter((a:any, index:any)=> index != 2)
-    // const x = b.slice(0,4)
-    // const y = a.slice(5)
-    // setPlay([
-    //   ...x,
-    //   a[2],
-    //   ...y
-    // ])
+
     const {index, id, to} = action.payload
 
       let getCopy = state[id].pdps2

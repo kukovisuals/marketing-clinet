@@ -47,6 +47,7 @@ const initialDndState: Somethign = {
 */
 // -----------------------------------------------------------------
 function ListProfiles(props: ListProps) {
+  console.log('list items=> ', props.data)
   const myRef = React.useRef<HTMLLIElement>(null);
   const [stateDrag, setSateDrag] = React.useState({
     id: 0,
@@ -74,10 +75,11 @@ function ListProfiles(props: ListProps) {
   const [filterMain, setFilterMain] = React.useState<DataType[]>([]);
 
   const [testItem, setTestItem] = React.useState<{id: string, profiles: TodoType}[]>([]);
-  // ---------------------------------------------------------------
   /*
+    ---------------------------------------------------------------
      main drag and drop fix the initial state 
      should be the index of the card grabbed
+     ---------------------------------------------------------------
   */
   const { profileItems, itemIndex, setItemIndex, handleDragStart, handleDragOver } = useDragAndDrop();
   
@@ -208,7 +210,7 @@ function ListProfiles(props: ListProps) {
     <div className="eby-list">
       <div>
         <span className='title-md'>{props.data}</span>
-        <h3>{props.index}</h3>
+        <h3>{props.index} here</h3>
       </div>
       <div>
 
