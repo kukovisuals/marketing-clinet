@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Upload from '../upload/upload';
 
 function PdpSheet() {
   const [profile, setProfile] = React.useState<string[]>([]);
-  const handleChildData = (data: string[]) => {
-    setProfile(data)
-  }
 
+  const handleChildData = useCallback( (data: string[]) => {
+      setProfile(data)
+  },[setProfile, profile] ); 
+
+  console.log('prodile in pdpSheet.tsx -> ', typeof profile)
   return (
     <div className="Profile">
       <Upload onData={handleChildData} />
       <div className='sheet-block'>
-        {profile && profile.map((d: string, i: number) =>
-          <ImportedData data={d} index={i} />
+        {typeof profile != 'object' ? (
+          <p> something when twon</p>
+        ) : (
+          profile.map((d: string, i: number) =>
+            <ImportedData key={`eby-imort-${i}`} data={d} index={i} />
+          )
+
         )}
+        
       </div>
     </div>
   )
@@ -25,6 +33,7 @@ interface ImportType {
 }
 
 function ImportedData(props: ImportType) {
+  console.log(props.data, 'eby-imort-'+props.index)
   const [a, b, c, d, e, f, g, h, i, j, k, l] = props.data
   const index = props.index
 
@@ -33,35 +42,35 @@ function ImportedData(props: ImportType) {
   if (index === 0) {
     return (
       <div className="eby-component-flex eby-header-style">
-        <h3 className='eby-sheet-1' key={'id-' + c}>{a}</h3>
-        <h3 className='eby-sheet-lg' key={a + b}>{b}</h3>
-        <h3 className='eby-sheet-sm' key={b + c}>{c}</h3>
-        <h3 className='eby-sheet-sm' key={d}>{d}</h3>
-        <h3 className='eby-sheet-sm' key={e}>{e}</h3>
-        <h3 className='eby-sheet-sm' key={f}>{f}</h3>
-        <h3 className='eby-sheet-sm' key={g}>{g}</h3>
-        <h3 className='eby-sheet-sm' key={h}>{h}</h3>
-        <h3 className='eby-sheet-sm' key={i}>{i}</h3>
-        <h3 className='eby-sheet-sm' key={j}>{j}</h3>
-        <h3 className='eby-sheet-sm' key={k}>{k}</h3>
-        <h3 className='eby-sheet-sm' key={l}>{l}</h3>
+        <h3 className='eby-sheet-1'>{a}</h3>
+        <h3 className='eby-sheet-lg' >{b}</h3>
+        <h3 className='eby-sheet-sm' >{c}</h3>
+        <h3 className='eby-sheet-sm' ></h3>
+        <h3 className='eby-sheet-sm' ></h3>
+        <h3 className='eby-sheet-sm' ></h3>
+        <h3 className='eby-sheet-sm' ></h3>
+        <h3 className='eby-sheet-sm' ></h3>
+        <h3 className='eby-sheet-sm' ></h3>
+        <h3 className='eby-sheet-sm' ></h3>
+        <h3 className='eby-sheet-sm' ></h3>
+        <h3 className='eby-sheet-sm' ></h3>
       </div>
     )
   }
   return (
     <div className={`eby-component-flex eby-row-color-${flip}`}>
-      <span className='eby-sheet-1' key={'id-' + c}>{a}</span>
-      <span className='eby-sheet-lg' key={a + '-' + b}>{b}</span>
-      <span className='eby-sheet-sm' key={a + '-' + c}>{c}</span>
-      <span className='eby-sheet-sm' key={d}>{d}</span>
-      <span className='eby-sheet-sm' key={e}>{e}</span>
-      <span className='eby-sheet-sm' key={f}>{f}</span>
-      <span className='eby-sheet-sm' key={g}>{g}</span>
-      <span className='eby-sheet-sm' key={h}>{h}</span>
-      <span className='eby-sheet-sm' key={i}>{i}</span>
-      <span className='eby-sheet-sm' key={j}>{j}</span>
-      <span className='eby-sheet-sm' key={k}>{k}</span>
-      <span className='eby-sheet-sm' key={l}>{l}</span>
+      <span className='eby-sheet-1' >{a}</span>
+      <span className='eby-sheet-lg'>{b}</span>
+      <span className='eby-sheet-sm'>{c}</span>
+      <span className='eby-sheet-sm'>{d}</span>
+      <span className='eby-sheet-sm'>{e}</span>
+      <span className='eby-sheet-sm'>{f}</span>
+      <span className='eby-sheet-sm'>{g}</span>
+      <span className='eby-sheet-sm'>{h}</span>
+      <span className='eby-sheet-sm'>{i}</span>
+      <span className='eby-sheet-sm'>{j}</span>
+      <span className='eby-sheet-sm'>{k}</span>
+      <span className='eby-sheet-sm'>{l}</span>
     </div>
   )
 }

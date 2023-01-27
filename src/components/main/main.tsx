@@ -12,18 +12,23 @@ function Main() {
   const mvid = `${year}-${month}`
   console.log('--------------------')
   console.log(mvid)
-  
+
   const uri = `/api/monthViews/${mvid}`
   const { data, isLoading, error } = useFetch({ uri, method: 'GET' });
 
   const dispatch = useAppDispatch()
 
   dispatch(setCurrentMonth(mvid))
-  async function retrieveMonth() {
-    const newMonth = await data[0].profiles
-    console.log('main => ', data[0].profiles)
-    for (let i = 0; i < newMonth.length; i++) {
-      dispatch(initObject({ id: i, name: newMonth[i] }))
+
+  const retrieveMonth = async () => {
+    console.log('------ main.tsx ------')
+    console.log(data)
+    if (typeof data == 'object' && data != null) {
+      const newMonth = await data[0].profiles
+      console.log('main => ', data[0].profiles)
+      for (let i = 0; i < newMonth.length; i++) {
+        await dispatch(initObject({ id: i, name: newMonth[i] }))
+      }
     }
   }
   React.useEffect(() => {
@@ -39,7 +44,7 @@ function Main() {
   if (error) {
     return <p>Error: {error.message}</p>;
   }
- 
+
   return (
     <div className="Main">
       <Selection />
@@ -52,7 +57,7 @@ function formatDay() {
   const today = new Date();
   const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
   const yyyy = today.getFullYear();
-
+  console.log(mm)
   return [yyyy, mm];
 }
 

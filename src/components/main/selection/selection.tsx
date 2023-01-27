@@ -51,17 +51,19 @@ function Selection() {
     }
     makePostRequest();
     dispatch(isUpload(isLoad))
+    alert('🚀 You have created and empty field of all profiles, ready to get filled 👍')
 
   }
 
   async function makePostRequest() {
     try {
-      const formatDay = `${newDate.year}-${newDate.month}`;
-      console.log('Date ------>', formatDay)
-      const res = await axios.get(`http://localhost:3001/api/monthViews/${formatDay}`);
+      const [year, month] = formatDay();
+      const mvid = `${year}-${month}`
+      console.log('Date ------>', mvid)
+      const res = await axios.get(`http://localhost:3001/api/monthViews/${mvid}`);
       setResponse(res.data);
-      const newMonth = res.data.profiles
-      console.log('clear month ------>')
+      const newMonth = res.data[0].profiles
+      console.log('selection.tsx meakepost request ------>', newMonth)
 
       dispatch(restartMonth())
       for (let i = 0; i < newMonth.length; i++) {
@@ -103,5 +105,12 @@ function Selection() {
 }
 
 
+function formatDay() {
+  const today = new Date();
+  const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  const yyyy = today.getFullYear();
+  console.log(mm)
+  return [yyyy, mm];
+}
 
 export default Selection
