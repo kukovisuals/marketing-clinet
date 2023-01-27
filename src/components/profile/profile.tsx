@@ -29,23 +29,29 @@ function Profile() {
   */
   async function fetchProductShopify() {
     let k = 0
-    let newData = await data.prodData
-    console.log('profiles -> ', newData)
-    for (let pdp = 0; pdp < newData.length; pdp++) {
+    console.log('------data------ profile')
+    console.log(data);
 
-      for (let j = 0; j < newData[pdp].variants.length; j++) {
-        const checkKeys = (newData[pdp].variants[j].title && newData[pdp].variants[j].sku)
-        if (checkKeys) {
+    if(typeof data == 'object' && data != null){
 
-          let newField: DataType = {
-            'id': k,
-            'name': newData[pdp]['title'],
-            'size': newData[pdp].variants[j].title,
-            'sku': newData[pdp].variants[j].sku,
-            'sizeId': newData[pdp].variants[j].product_id
+      let newData = await data.prodData
+      console.log('profiles -> ', newData)
+      for (let pdp = 0; pdp < newData.length; pdp++) {
+  
+        for (let j = 0; j < newData[pdp].variants.length; j++) {
+          const checkKeys = (newData[pdp].variants[j].title && newData[pdp].variants[j].sku)
+          if (checkKeys) {
+  
+            let newField: DataType = {
+              'id': k,
+              'name': newData[pdp]['title'],
+              'size': newData[pdp].variants[j].title,
+              'sku': newData[pdp].variants[j].sku,
+              'sizeId': newData[pdp].variants[j].product_id
+            }
+            dispatch(mainProfileData(newField))
+            k++
           }
-          dispatch(mainProfileData(newField))
-          k++
         }
       }
     }
@@ -57,7 +63,11 @@ function Profile() {
   }, [data, isLoading, error])
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="spinner">
+        <div className="spinner-inner"></div>
+      </div>
+    );
   }
 
   if (error) {
