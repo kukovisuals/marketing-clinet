@@ -40,14 +40,15 @@ const initialDndState: Somethign = {
   originalOrder: [],
   updatedOrder: [],
 }
-/* -----------------------------------------------------------------
+/* 
+  -----------------------------------------------------------------
     List of Profiles Setup the dummy data to all profiles 
     Add buttons to each of them 
     Data of profile will be inserted here
+  -----------------------------------------------------------------
 */
-// -----------------------------------------------------------------
 function ListProfiles(props: ListProps) {
-  console.log('list items=> ', props.data)
+  // console.log('list items listProfiles.tsx => ', props.data)
   const myRef = React.useRef<HTMLLIElement>(null);
   const [stateDrag, setSateDrag] = React.useState({
     id: 0,

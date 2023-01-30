@@ -5,11 +5,12 @@ import { mainProfileData } from "../../features/profile/profile-slice";
 import useProduct from '../useFetch/useProducts';
 import ListProfiles from './ListProfiles';
 import { DataType } from '../../utilities/profileTypes';
+
+import './Profile.css'
 /* -----------------------------------------------------------------
     All the title of the different profiles
   -----------------------------------------------------------------
 */
-
 const url = 'https://api.join-eby.com/other/subcal/get_products.php'
 // const url = 'http://localhost:5173/products.json'
 
@@ -65,7 +66,12 @@ function Profile() {
   if (isLoading) {
     return (
       <div className="spinner">
-        <div className="spinner-inner"></div>
+        <div className="spinner-inner">
+          <div className="spinner-container">
+
+           <span className='spinner-emoji'></span>
+          </div>
+        </div>
       </div>
     );
   }

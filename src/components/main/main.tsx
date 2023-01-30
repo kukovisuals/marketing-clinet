@@ -20,19 +20,23 @@ function Main() {
   const dispatch = useAppDispatch()
 
   dispatch(setCurrentMonth(mvid))
-
+  /* 
+    -----------------------------------------------------------------
+    -               Add each card from the database                 -
+    -----------------------------------------------------------------
+  */
   const retrieveMonth = async () => {
-    console.log('------ main.tsx ------')
-    console.log('Main data coming from -> ', uri)
-    console.log(data)
-    console.log('------ end main.tsx ------')
+    // console.log('------ main.tsx ------')
+    // console.log('Main data coming from -> ', uri)
+    // console.log(data)
+    // console.log('------ end main.tsx ------')
     if (typeof data == 'object' && data != null) {
       const newMonth = await data[0].profiles
       console.log('main => ', data[0].profiles)
       dispatch(restartMonth())
       for (let i = 0; i < newMonth.length; i++) {
-
-        dispatch(initObject({ id: i, name: newMonth[i] }))
+        
+          dispatch(initObject({ id: i, name: newMonth[i] }))
       }
       // for (let i = 0; i < newMonth.length; i++) {
       //   await dispatch(initObject({ id: i, name: newMonth[i] }))

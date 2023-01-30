@@ -69,8 +69,10 @@ function Selection() {
 
         for(const sizeK of Object.keys(newMonth[i].sizes[0]) ){
 
-          console.log('sheet new month=> ', i,  newMonth[i].name + sizeK )      
-          dispatch(initObject({ id: i, name: newMonth[i].name + ' in ' + sizeK }))
+          if(!sizeK.includes('_id')){
+            // console.log('sheet new month=> ', i,  newMonth[i].name + sizeK )      
+            dispatch(initObject({ id: i, name: newMonth[i].name + ' in ' + sizeK }))
+          }
         }
       }
     } catch (error) {
@@ -78,7 +80,7 @@ function Selection() {
     }
   }
 
-  console.log('sheet => ', sheet)
+  console.log('sheet selection.tsx => ', sheet)
   return (
     <div className="Selection">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
