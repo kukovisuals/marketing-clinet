@@ -68,10 +68,26 @@ function Selection() {
       for (let i = 0; i < newMonth.length; i++) {
 
         for(const sizeK of Object.keys(newMonth[i].sizes[0]) ){
-
+          /*
+            ------------------------------------------------------------
+            -  Here you can change the payload id::sku::sizeId         -   
+            ------------------------------------------------------------
+          */
+          const pdpEmptyArr = []
           if(!sizeK.includes('_id')){
-            // console.log('sheet new month=> ', i,  newMonth[i].name + sizeK )      
-            dispatch(initObject({ id: i, name: newMonth[i].name + ' in ' + sizeK }))
+            console.log('sheet new month=> ', newMonth[i].sizes[0][sizeK])
+            const newValues = newMonth[i].sizes[0][sizeK]      
+            
+            if (newValues.length > 0) {
+
+              for(const sizeElement of newValues){
+                
+                const newPdpObj = { id: sizeElement.split('--')[0], name: sizeElement.split('--')[1] } 
+                 pdpEmptyArr.push(newPdpObj)
+              }
+            } 
+
+            dispatch(initObject({ id: i, name: newMonth[i].name + ' in ' + sizeK, pdpArr: pdpEmptyArr }))
           }
         }
       }

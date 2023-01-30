@@ -1,5 +1,5 @@
 import React from 'react';
-
+import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { mainProfileData } from "../../features/profile/profile-slice";
 import useProduct from '../useFetch/useProducts';
@@ -30,19 +30,16 @@ function Profile() {
   */
   async function fetchProductShopify() {
     let k = 0
-    console.log('------data------ profile')
-    console.log(data);
-
-    if(typeof data == 'object' && data != null){
+    if (typeof data == 'object' && data != null) {
 
       let newData = await data.prodData
       console.log('profiles -> ', newData)
       for (let pdp = 0; pdp < newData.length; pdp++) {
-  
+
         for (let j = 0; j < newData[pdp].variants.length; j++) {
           const checkKeys = (newData[pdp].variants[j].title && newData[pdp].variants[j].sku)
           if (checkKeys) {
-  
+
             let newField: DataType = {
               'id': k,
               'name': newData[pdp]['title'],
@@ -67,10 +64,6 @@ function Profile() {
     return (
       <div className="spinner">
         <div className="spinner-inner">
-          <div className="spinner-container">
-
-           <span className='spinner-emoji'></span>
-          </div>
         </div>
       </div>
     );

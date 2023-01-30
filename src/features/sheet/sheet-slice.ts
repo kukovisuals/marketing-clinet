@@ -17,19 +17,20 @@ interface CounterState {
   pdps2: TodoType[];
   draggedItem: TodoType | null;
 }
-
 const initialState: Array<CounterState> = [];
 // define slice container reducer logic
 const sheetSlice = createSlice({
   name: "sheet",
   initialState,
   reducers: {
-    initObject(state, action: PayloadAction<{ id: number; name: string }>) {
+    initObject(state, action: PayloadAction<{ id: number; name: string; pdpArr: TodoType[] | [] }>) {
       console.log('redux sheet ', action.payload.id, action.payload.name)
+      const pdpsArrValues = action.payload.pdpArr
+
       state.push({
         id: action.payload.id,
         name: action.payload.name,
-        pdps2:[],
+        pdps2: pdpsArrValues,
         draggedItem:null
       });
     },

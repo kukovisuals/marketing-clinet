@@ -11,8 +11,6 @@ import './main.css';
 function Main() {
   const [year, month] = formatDay()
   const mvid = `${year}-${month}`
-  console.log('--------------------')
-  console.log(mvid)
 
   const uri = `/api/monthViews/${mvid}`
   const { data, isLoading, error } = useFetch({ uri, method: 'GET' });
@@ -26,10 +24,7 @@ function Main() {
     -----------------------------------------------------------------
   */
   const retrieveMonth = async () => {
-    // console.log('------ main.tsx ------')
-    // console.log('Main data coming from -> ', uri)
-    // console.log(data)
-    // console.log('------ end main.tsx ------')
+
     if (typeof data == 'object' && data != null) {
       const newMonth = await data[0].profiles
       console.log('main => ', data[0].profiles)
