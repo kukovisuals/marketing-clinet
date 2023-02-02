@@ -1,0 +1,56 @@
+/* LOADING ....*/
+.spinner {
+    width: 200px;
+    height: 200px;
+    margin: 0px auto;
+    position: relative;
+    text-align: center;
+}
+.spinner-wrapper{
+    position: absolute;
+    width: 100%;
+    top: 92px;
+}
+.spinner-p{
+    position: absolute;
+    top: 34%;
+    left: 9%;
+    font-size: 15px;
+}
+.spinner p{
+    line-height: 1.6;
+    margin: 0;
+}
+
+.spinner-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border-top: 3px solid #333;
+    border-right: 3px solid transparent;
+    animation: spinner-rotate 1s linear infinite,
+        0.5s spinner-shrink linear infinite alternate;
+    -webkit-animation: spinner-rotate 1s linear infinite;
+}
+
+@keyframes spinner-rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spinner-rotate {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spinner-shrink {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(0.5);
+    }
+}

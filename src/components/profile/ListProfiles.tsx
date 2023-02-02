@@ -40,13 +40,15 @@ const initialDndState: Somethign = {
   originalOrder: [],
   updatedOrder: [],
 }
-/* -----------------------------------------------------------------
+/* 
+  -----------------------------------------------------------------
     List of Profiles Setup the dummy data to all profiles 
     Add buttons to each of them 
     Data of profile will be inserted here
+  -----------------------------------------------------------------
 */
-// -----------------------------------------------------------------
 function ListProfiles(props: ListProps) {
+  // console.log('list items listProfiles.tsx => ', props.data)
   const myRef = React.useRef<HTMLLIElement>(null);
   const [stateDrag, setSateDrag] = React.useState({
     id: 0,
@@ -74,10 +76,11 @@ function ListProfiles(props: ListProps) {
   const [filterMain, setFilterMain] = React.useState<DataType[]>([]);
 
   const [testItem, setTestItem] = React.useState<{id: string, profiles: TodoType}[]>([]);
-  // ---------------------------------------------------------------
   /*
+    ---------------------------------------------------------------
      main drag and drop fix the initial state 
      should be the index of the card grabbed
+     ---------------------------------------------------------------
   */
   const { profileItems, itemIndex, setItemIndex, handleDragStart, handleDragOver } = useDragAndDrop();
   
@@ -196,7 +199,7 @@ function ListProfiles(props: ListProps) {
         id: props.index,
         profiles : main
       }))
-      console.log(testItem)
+      // console.log(testItem)
     }
     setItemIndex(props.index)
   },[main])
@@ -204,23 +207,22 @@ function ListProfiles(props: ListProps) {
   // console.log('---------------------------------------------------------------')
   // console.log(profileItems, itemIndex)
   // console.log('---------------------------------------------------------------')
+  console.log('prifles-> ', typeof profileItems)
   return (
     <div className="eby-list">
       <div>
-        <span className='title-md'>{props.data}</span>
-        <h3>{props.index}</h3>
+        <span className='title-md'>{props.index}. {props.data}</span>
       </div>
       <div>
 
         <ul className='ul-list'>
-          {profileItems.length > 0 && profileItems.map((item: any, i: number) =>
+          {(profileItems && profileItems.length > 0) && profileItems.map((item: any, i: number) =>
             <li
               key={item.id}
               draggable
               onDragStart={e => handleDragStart(e, i, props.index)}
               onDragOver={() => handleDragOver(i, props.index)}
               className="skus-main"
-              data-profileId={i}
             >
               <div className='eby-sm-flex eby-flx-spc-btw'>
                 <span className='name-update' onClick={handleUpdate(i, props.index)}>{item.name}</span>

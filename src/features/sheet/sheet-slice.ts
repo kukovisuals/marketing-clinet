@@ -14,9 +14,9 @@ interface DragArrayType {
 interface CounterState {
   id: number;
   name: string;
-  pdps2: TodoType[];
+  pdps2: TodoType[] | [];
   draggedItem: TodoType | null;
-}
+} 
 
 const initialState: Array<CounterState> = [];
 // define slice container reducer logic
@@ -24,19 +24,29 @@ const sheetSlice = createSlice({
   name: "sheet",
   initialState,
   reducers: {
-    initObject(state, action: PayloadAction<{ id: number; name: string }>) {
+    initObject(state, action: PayloadAction<{ id: number; name: string; pdpArr: TodoType[] | [] }>) {
+      // console.log('redux sheet ', action.payload.id, action.payload.name)
+      const pdpsArrValues = action.payload.pdpArr || []
+
       state.push({
         id: action.payload.id,
         name: action.payload.name,
-        pdps2:[],
+        pdps2: pdpsArrValues,
         draggedItem:null
       });
     },
+    // pushSkuSheet(state, action: PayloadAction<{ index: number; description: TodoType }>){
+    //   state[action.payload.index].pdps2.push(action.payload.description)
+    // },
     addSelectedPdp(
       state,
-      action: PayloadAction<{ index: number; description: TodoType[] }>
+      action: PayloadAction<{ index: number; description: TodoType[] | []}>
     ) {
       console.log(action.payload.description)
+      console.log(' pdpds -> ', state[action.payload.index])
+      // if(state[action.payload.index] == undefined){
+      //   state[action.payload.index].pdps2 = []  
+      // }
       state[action.payload.index].pdps2 = action.payload.description;
     },
     removePdp(state, action: PayloadAction<{index:number, id:number}>) {
@@ -51,15 +61,7 @@ const sheetSlice = createSlice({
       return state;
     },
     updateDrag(state, action: PayloadAction<{index:number, id:number, to:number}>) {
-    //   const a = [0,1,2,3,4,5,6]
-    // const b = a.filter((a:any, index:any)=> index != 2)
-    // const x = b.slice(0,4)
-    // const y = a.slice(5)
-    // setPlay([
-    //   ...x,
-    //   a[2],
-    //   ...y
-    // ])
+
     const {index, id, to} = action.payload
 
       let getCopy = state[id].pdps2
@@ -81,9 +83,13 @@ const sheetSlice = createSlice({
       const {obj, objId} = action.payload
       state[objId].pdps2 = obj;
     },
+    resetSheet: (state) => {
+      // Create a shallow copy of the array using Array.prototype.slice()
+      state = initialState
+    },
   },
 });
 
-export const { initObject, removePdp, updateDrag, addSelectedPdp, setDraggedItem, setItemsDragged } =
+export const { initObject, removePdp, updateDrag, addSelectedPdp, setDraggedItem, setItemsDragged, resetSheet } =
   sheetSlice.actions;
 export default sheetSlice.reducer;

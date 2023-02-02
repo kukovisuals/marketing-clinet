@@ -35,13 +35,6 @@ function useDragAndDrop(): DragAndDropHook {
   const dispatch = useAppDispatch();
 
   function handleDragStart(e: React.DragEvent<HTMLLIElement>, index: number, id: number) {
-    // get id of the card we want to modify
-    console.log('almost there man you got it')
-    console.log(profileItems, itemIndex)
-    console.log('---   ---')
-    console.log('    >    ', index)
-    console.log('  -____- ')
-    console.log(profileItems[index])
 
     dispatch(setDraggedItem({ obj: profileItems[index], objId: itemIndex }))
     e.dataTransfer.effectAllowed = 'move';
