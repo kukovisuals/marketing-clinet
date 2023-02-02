@@ -16,7 +16,7 @@ function PdpSheet() {
         {typeof profile != 'object' ? (
           <p> something when twon</p>
         ) : (
-          profile.map((d: string, i: number) =>
+          profile.map((d: any, i: number) =>
             <ImportedData key={`eby-imort-${i}`} data={d} index={i} />
           )
 
@@ -28,14 +28,13 @@ function PdpSheet() {
 }
 
 interface ImportType {
-  data: string;
+  data: string[];
   index: number;
 }
 
 function ImportedData(props: ImportType) {
 
   console.log(props.data.length)
-  const [a, b, c, d, e, f, g, h, i, j, k, l] = props.data
   const index = props.index
 
   const flip = index % 2 === 0 ? 'light' : 'dark';
@@ -52,7 +51,7 @@ function ImportedData(props: ImportType) {
     return (
       <div className={`eby-component-flex eby-row-color-${flip}`}>
         {
-          props.data.map((d: any, j:number) => <ListSheet num={j} sheetData={d} key={index+'-'+j} />)
+          props.data.map((d: any, j:number) => <ListSheet sheetData={d} key={index+'-'+j} />)
         }
       </div>
     )
@@ -61,7 +60,6 @@ function ImportedData(props: ImportType) {
 
 type SheetTypes = {
   sheetData: string,
-  num: number
 }
 function HeaderSheet(props: SheetTypes) {
 
