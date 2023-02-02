@@ -13,7 +13,7 @@ export type DataType = {
   size: string;
   name: string;
   sku: string;
-  sizeId?: string | number;
+  sizeId: string;
 };
 
 export type ListProps = {

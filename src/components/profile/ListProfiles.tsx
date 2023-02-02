@@ -199,7 +199,7 @@ function ListProfiles(props: ListProps) {
         id: props.index,
         profiles : main
       }))
-      console.log(testItem)
+      // console.log(testItem)
     }
     setItemIndex(props.index)
   },[main])
