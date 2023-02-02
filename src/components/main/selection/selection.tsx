@@ -6,7 +6,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { initObject } from "../../../features/sheet/sheet-slice";
+import { initObject, resetSheet } from "../../../features/sheet/sheet-slice";
 import { isUpload } from "../../../features/profile/profile-slice";
 import { styled } from '@mui/material/styles';
 import ListProfiles from '../../profile/ListProfiles';
@@ -27,7 +27,7 @@ function Selection() {
   const sheet = useAppSelector((state) => state.sheet);
   const dispatch = useAppDispatch();
 
-  const [value, setValue] = React.useState<Date | null>(new Date());
+  const [value, setValue] = React.useState<Date | any>(new Date());
   const [response, setResponse] = React.useState(null);
   const [newDate, setNewDate] = React.useState({
     month: '',
@@ -38,32 +38,45 @@ function Selection() {
   if (response) {
     console.log(response)
   }
-
-  console.log(value?.getFullYear())
+  console.log('date ', value)
   const handleCreate = (event: React.MouseEvent) => {
+    let monthValue = ''
+    let yearValue = ''
+    if(typeof value?.$M == 'number'){
 
-    if (value) {
-      setNewDate({
-        month: String(value.getMonth() + 1),
-        year: String(value.getFullYear()),
-      })
+      monthValue = String(value.$M + 1)
+      yearValue = String(value.$y)
+      setIsLoad(true)
+
+    } else {
+      monthValue = String(value.getMonth() + 1)
+      yearValue = String(value.getFullYear())
       setIsLoad(true)
     }
-    makePostRequest();
+
+    setNewDate({
+      month: monthValue,
+      year: yearValue,
+    })
+    console.log(newDate)
+    const mm = String(newDate.month).padStart(2, "0");
+    makePostRequest([newDate.year, mm]);
     dispatch(isUpload(isLoad))
     alert('🚀 You have created and empty field of all profiles, ready to get filled 👍')
 
   }
 
-  async function makePostRequest() {
+  async function makePostRequest(formatDay: string[]) {
+    dispatch(resetSheet())
     try {
-      const [year, month] = formatDay();
+      const [year, month] = formatDay;
       const mvid = `${year}-${month}`
       console.log('Date ------>', mvid)
       const res = await axios.get(`http://localhost:3001/api/monthViews/${mvid}`);
       setResponse(res.data);
       const newMonth = res.data[0].profiles
       console.log('selection.tsx meakepost request ------>', newMonth)
+      
       
       for (let i = 0; i < newMonth.length; i++) {
 
@@ -75,7 +88,7 @@ function Selection() {
           */
           const pdpEmptyArr = []
           if(!sizeK.includes('_id')){
-            console.log('sheet new month=> ', newMonth[i].sizes[0][sizeK])
+            // console.log('sheet new month=> ', newMonth[i].sizes[0][sizeK])
             const newValues = newMonth[i].sizes[0][sizeK]      
             
             if (newValues.length > 0) {
@@ -106,6 +119,7 @@ function Selection() {
               <DatePicker
                 label="Select new date"
                 value={value}
+                openTo="month"
                 views={["year", "month"]}
                 onChange={(newValue) => {
                   setValue(newValue);
@@ -115,7 +129,7 @@ function Selection() {
             </div>
             <div className='eby-inpt-spce'>
               <CustomButton variant="outlined" onClick={handleCreate}>
-                CREATE
+                SUBMIT
               </CustomButton>
             </div>
           </div>

@@ -207,23 +207,22 @@ function ListProfiles(props: ListProps) {
   // console.log('---------------------------------------------------------------')
   // console.log(profileItems, itemIndex)
   // console.log('---------------------------------------------------------------')
+  console.log('prifles-> ', typeof profileItems)
   return (
     <div className="eby-list">
       <div>
-        <span className='title-md'>{props.data}</span>
-        <h3>{props.index} here</h3>
+        <span className='title-md'>{props.index}. {props.data}</span>
       </div>
       <div>
 
         <ul className='ul-list'>
-          {profileItems.length > 0 && profileItems.map((item: any, i: number) =>
+          {(profileItems && profileItems.length > 0) && profileItems.map((item: any, i: number) =>
             <li
               key={item.id}
               draggable
               onDragStart={e => handleDragStart(e, i, props.index)}
               onDragOver={() => handleDragOver(i, props.index)}
               className="skus-main"
-              data-profileId={i}
             >
               <div className='eby-sm-flex eby-flx-spc-btw'>
                 <span className='name-update' onClick={handleUpdate(i, props.index)}>{item.name}</span>

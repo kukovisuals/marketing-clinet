@@ -61,12 +61,17 @@ function Profile() {
   }, [data, isLoading, error])
 
   if (isLoading) {
-    return (
-      <div className="spinner">
-        <div className="spinner-inner">
-        </div>
+  return (
+    <div className='spinner-wrapper'>
+    <div className="spinner">
+      <div className='spinner-p'>
+        <p>Loading All product SKUs</p>
+        <p>One Moment Please...</p>
       </div>
-    );
+      <div className='spinner-inner'></div>
+    </div>
+    </div>
+  );
   }
 
   if (error) {

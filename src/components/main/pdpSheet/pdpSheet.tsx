@@ -1,3 +1,4 @@
+import produce from 'immer';
 import React, { useCallback } from 'react';
 import Upload from '../upload/upload';
 
@@ -33,7 +34,14 @@ interface ImportType {
 }
 
 function ImportedData(props: ImportType) {
-  console.log(props.data, 'eby-imort-'+props.index)
+  console.log(typeof  props.data, props.data)
+  const sheetRows = props.data
+  // for(let column = 2; column <  sheetRows.length; column++){
+
+  //   if( sheetRows[column].length > 6 ){ 
+  //     console.log('hey',sheetRows[column])
+  //   }
+  // }
   const [a, b, c, d, e, f, g, h, i, j, k, l] = props.data
   const index = props.index
 
