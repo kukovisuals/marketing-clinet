@@ -1,11 +1,12 @@
 import './App.css'
 import { Main, Profile } from './components'
 
-function App() {;
+function App() {
+  
   return (
     <div className="App wrapper">
       <Main />
-      <Profile />
+      <Profile/>
     </div>
   )
 }

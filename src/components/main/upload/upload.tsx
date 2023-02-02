@@ -3,7 +3,6 @@ import Papa, { parse } from 'papaparse';
 import Button from '@mui/material/Button';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { initObject, addSelectedPdp } from "../../../features/sheet/sheet-slice";
-import Profile from "../../profile/profile";
 import { TodoType } from '../../../utilities/profileTypes';
 
 
@@ -13,6 +12,7 @@ function Upload(props: any) {
   const pdpSkuData = useAppSelector((state) => state.profile.mainData)
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log('handle upload ',event.target)
     if (event.target && event.target.files) {
 
       const file = event.target.files[0];
@@ -63,10 +63,7 @@ function Upload(props: any) {
                       console.log('matching -> ', comingData[i][column], pdpSkuData[k])
                       k = pdpSkuData.length
                     }
-  
-  
                   }
-  
                 }
               }
               dispatch(addSelectedPdp({
@@ -74,7 +71,7 @@ function Upload(props: any) {
                 description: skuArr
               }))
             }
-          }, 2000)
+          }, 250)
           
           // -----------------------------------------------------------
           props.onData(parsedData.data)

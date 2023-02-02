@@ -6,10 +6,11 @@ function PdpSheet() {
   const [profile, setProfile] = React.useState<string[]>([]);
 
   const handleChildData = useCallback( (data: string[]) => {
+
       setProfile(data)
   },[setProfile, profile] ); 
 
-  console.log('prodile in pdpSheet.tsx -> ', typeof profile)
+  console.log('prodile in pdpSheet.tsx -> ', profile)
   return (
     <div className="Profile">
       <Upload onData={handleChildData} />

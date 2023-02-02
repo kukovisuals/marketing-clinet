@@ -11,6 +11,7 @@ import { DataType, TodoType, ListProps } from '../../utilities/profileTypes';
 import useDragAndDrop from '../useDragAndDrop/useDragAndDrop';
 import DrawApiList from './DrawApiList';
 import { styled } from '@mui/material/styles';
+
 const CuatomBox = styled(Box)`
   width: 50%;
 `;
@@ -25,38 +26,15 @@ const ButtonCheckbox = styled(Button)`
   padding:0;
 
   border: 1px solid gray;
-`;
-type Somethign = {
-  draggedFrom: number,
-  draggedTo: number,
-  isDragging: boolean,
-  originalOrder: TodoType[],
-  updatedOrder: TodoType[],
-}
-const initialDndState: Somethign = {
-  draggedFrom: 0,
-  draggedTo: 0,
-  isDragging: false,
-  originalOrder: [],
-  updatedOrder: [],
-}
+`; 
 /* 
-  -----------------------------------------------------------------
-    List of Profiles Setup the dummy data to all profiles 
-    Add buttons to each of them 
-    Data of profile will be inserted here
-  -----------------------------------------------------------------
+  ******************************************************************
+  *  List of Profiles Setup the dummy data to all profiles         *
+  *  Add buttons to each of them                                   *
+  *  Data of profile will be inserted here                         *
+  ******************************************************************
 */
 function ListProfiles(props: ListProps) {
-  // console.log('list items listProfiles.tsx => ', props.data)
-  const myRef = React.useRef<HTMLLIElement>(null);
-  const [stateDrag, setSateDrag] = React.useState({
-    id: 0,
-    index: 0
-  })
-  const [dragAndDrop, setDragAndDrop] = React.useState(initialDndState);
-
-  const [play, setPlay] = React.useState([1, 2, 3, 4, 5, 6])
 
   const [todoNth, newTodoNth] = React.useState(0)
 

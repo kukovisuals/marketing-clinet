@@ -38,6 +38,7 @@ function Selection() {
   if (response) {
     console.log(response)
   }
+  
   console.log('date ', value)
   const handleCreate = (event: React.MouseEvent) => {
     let monthValue = ''
