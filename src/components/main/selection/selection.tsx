@@ -9,7 +9,6 @@ import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { initObject, resetSheet } from "../../../features/sheet/sheet-slice";
 import { isUpload } from "../../../features/profile/profile-slice";
 import { styled } from '@mui/material/styles';
-import ListProfiles from '../../profile/ListProfiles';
 import Send from '../../send/Send';
 
 import './selection.css'
@@ -139,15 +138,6 @@ function Selection() {
       </LocalizationProvider>
     </div>
   )
-}
-
-
-function formatDay() {
-  const today = new Date();
-  const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-  const yyyy = today.getFullYear();
-  console.log(mm)
-  return [yyyy, mm];
 }
 
 export default Selection
