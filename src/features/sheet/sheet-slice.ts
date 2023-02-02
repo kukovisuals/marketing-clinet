@@ -1,22 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-type TodoType = {
-  id: string;
-  name: string;
-}
-interface DragType {
-  obj: TodoType | null;
-  objId: number
-}
-interface DragArrayType {
-  obj: TodoType[];
-  objId: number;
-}
-interface CounterState {
-  id: number;
-  name: string;
-  pdps2: TodoType[] | [];
-  draggedItem: TodoType | null;
-} 
+import { CounterState, TodoType, DragArrayType, DragType } from "../../utilities/reduxType/sheetType";
 
 const initialState: Array<CounterState> = [];
 // define slice container reducer logic
@@ -35,19 +18,14 @@ const sheetSlice = createSlice({
         draggedItem:null
       });
     },
-    // pushSkuSheet(state, action: PayloadAction<{ index: number; description: TodoType }>){
-    //   state[action.payload.index].pdps2.push(action.payload.description)
-    // },
     addSelectedPdp(
       state,
       action: PayloadAction<{ index: number; description: TodoType[] | []}>
     ) {
-      console.log(action.payload.description)
-      console.log(' pdpds -> ', state[action.payload.index])
-      // if(state[action.payload.index] == undefined){
-      //   state[action.payload.index].pdps2 = []  
-      // }
-      state[action.payload.index].pdps2 = action.payload.description;
+      // console.log(' pdpds -> ', state[action.payload.index])
+      if(state[action.payload.index] != undefined){
+        state[action.payload.index].pdps2 = action.payload.description;
+      }
     },
     removePdp(state, action: PayloadAction<{index:number, id:number}>) {
       const {index, id} = action.payload;

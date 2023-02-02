@@ -17,8 +17,11 @@
 .eby-row-color-light {
   background-color: #FFF;
 }
-.eby-row-color-dark {
-  
+.eby-row-color-dark {  
   background-color: #eff2f9;
 }
-
+.eby-header-style h3:first-child,
+.eby-row-color-light span:first-child,
+.eby-row-color-dark span:first-child{
+ width: 3%;
+}

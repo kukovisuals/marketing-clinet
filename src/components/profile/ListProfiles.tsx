@@ -11,6 +11,7 @@ import { DataType, TodoType, ListProps } from '../../utilities/profileTypes';
 import useDragAndDrop from '../useDragAndDrop/useDragAndDrop';
 import DrawApiList from './DrawApiList';
 import { styled } from '@mui/material/styles';
+
 const CuatomBox = styled(Box)`
   width: 50%;
 `;
@@ -25,38 +26,15 @@ const ButtonCheckbox = styled(Button)`
   padding:0;
 
   border: 1px solid gray;
-`;
-type Somethign = {
-  draggedFrom: number,
-  draggedTo: number,
-  isDragging: boolean,
-  originalOrder: TodoType[],
-  updatedOrder: TodoType[],
-}
-const initialDndState: Somethign = {
-  draggedFrom: 0,
-  draggedTo: 0,
-  isDragging: false,
-  originalOrder: [],
-  updatedOrder: [],
-}
+`; 
 /* 
-  -----------------------------------------------------------------
-    List of Profiles Setup the dummy data to all profiles 
-    Add buttons to each of them 
-    Data of profile will be inserted here
-  -----------------------------------------------------------------
+  ******************************************************************
+  *  List of Profiles Setup the dummy data to all profiles         *
+  *  Add buttons to each of them                                   *
+  *  Data of profile will be inserted here                         *
+  ******************************************************************
 */
 function ListProfiles(props: ListProps) {
-  // console.log('list items listProfiles.tsx => ', props.data)
-  const myRef = React.useRef<HTMLLIElement>(null);
-  const [stateDrag, setSateDrag] = React.useState({
-    id: 0,
-    index: 0
-  })
-  const [dragAndDrop, setDragAndDrop] = React.useState(initialDndState);
-
-  const [play, setPlay] = React.useState([1, 2, 3, 4, 5, 6])
 
   const [todoNth, newTodoNth] = React.useState(0)
 
@@ -84,23 +62,23 @@ function ListProfiles(props: ListProps) {
   */
   const { profileItems, itemIndex, setItemIndex, handleDragStart, handleDragOver } = useDragAndDrop();
   
-  // ---------------------------------------------------------------
   React.useEffect(() => {
     if (props.newProfile) setMain(props.newProfile)
   }, [props.newProfile])
-  // ---------------------------------------------------------------
+
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.value)
     setNewSearch(event.target.value)
   }
   const filteredItems = filterMain.filter(item => item.name.toLowerCase().includes(newSearch.toLowerCase()));
+  
   const handleRemove = (index: number, profIndex: number) =>
   (event: React.MouseEvent<HTMLElement>) => {
     // Grab the index and find it in shee-slice
     dispatch(removePdp({ index, id: profIndex }));
     console.log(event.target, index, ' profile ', profIndex)
   }
-  // ---------------------------------------------------------------
+
   const handleUpdate = (index: number, profIndex: number) =>
   (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
@@ -117,7 +95,7 @@ function ListProfiles(props: ListProps) {
       // update profile-slice sku
       if (updateSku) dispatch(updateTodo2(updateSku.pdps2))
     }
-    // -------------------------------------------------------------
+
     const toggleDrawer =
     (anchor: string, open: boolean, index: number, pSize: string) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -137,7 +115,7 @@ function ListProfiles(props: ListProps) {
         // add the todo with its corresponding index
         dispatch(setNewTodo(todoNth));
       };
-      // -------------------------------------------------------------
+
       const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         // add the todo with its corresponding index
@@ -147,7 +125,7 @@ function ListProfiles(props: ListProps) {
         // clear the profile skus from the from 
         dispatch(reset())
       };
-      // -------------------------------------------------------------
+
       const list = (anchor: string) => (
         <CuatomBox
         sx={{ width: '450px' }}
@@ -199,14 +177,10 @@ function ListProfiles(props: ListProps) {
         id: props.index,
         profiles : main
       }))
-      // console.log(testItem)
     }
     setItemIndex(props.index)
   },[main])
   
-  // console.log('---------------------------------------------------------------')
-  // console.log(profileItems, itemIndex)
-  // console.log('---------------------------------------------------------------')
   console.log('prifles-> ', typeof profileItems)
   return (
     <div className="eby-list">
